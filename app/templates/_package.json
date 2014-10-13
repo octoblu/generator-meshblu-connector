@@ -1,0 +1,7 @@
+{
+  "name": "meshblu-connector",
+  "version": "1.0.0",
+  "dependencies": {
+    "skynet": "^1.1.1"
+  }
+}
