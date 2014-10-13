@@ -1,7 +1,14 @@
 {
-  "name": "meshblu-connector",
+  "name": "<%= _.slugify(connectorName) %>",
   "version": "1.0.0",
+  "scripts": {
+    "start": "node command.js"
+  },
   "dependencies": {
     "skynet": "^1.1.1"
-  }
+  },
+  "keywords": [
+    "meshblu-connector",
+    "gateblu"
+  ]
 }

@@ -16,12 +16,29 @@ var MeshbluConnectorGenerator = yeoman.generators.Base.extend({
     this.log(yosay(
       'Welcome to the Meshblu Connector generator!'
     ));
-    done();
+
+    var prompts = [{
+      name: 'connectorName',
+      message: 'What is the name of your connector?'
+    }];
+
+    this.prompt(prompts, function (props) {
+      this.connectorName = props.connectorName;
+
+      done();
+    }.bind(this));
+  },
+
+  configuring: {
+    enforceFolderName: function () {
+      this.destinationRoot(this.connectorName);
+      this.config.save();
+    }
   },
 
   writing: {
     app: function () {
-      this.src.copy('_package.json', 'package.json');
+      this.template('_package.json', 'package.json');
       this.src.copy('_command.js', 'command.js');
       this.src.copy('_gitignore', '.gitignore');
       this.src.copy('_meshblu.json', 'meshblu.json');
@@ -30,7 +47,7 @@ var MeshbluConnectorGenerator = yeoman.generators.Base.extend({
   },
 
   end: function () {
-    this.installDependencies();
+    this.installDependencies({bower: false});
   }
 });
 

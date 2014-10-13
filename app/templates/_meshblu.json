@@ -1,6 +1,6 @@
 {
   "server" : "meshblu.octoblu.com",
   "port"   : 80,
-  "uuid"   : "", // curl -X POST http://meshblu.octoblu.com/devices
+  "uuid"   : "",
   "token"  : ""
 }
