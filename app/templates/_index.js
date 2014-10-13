@@ -34,8 +34,8 @@ function Plugin(options){
 util.inherits(Plugin, EventEmitter);
 
 Plugin.prototype.onMessage = function(message){
-  var data = message.message || message.payload;
-  this.emit('message', {devices: ['*'], topic: 'echo', payload: data});
+  var payload = message.payload;
+  this.emit('message', {devices: ['*'], topic: 'echo', payload: payload});
 };
 
 Plugin.prototype.setOptions = function(options){

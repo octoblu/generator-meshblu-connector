@@ -38,3 +38,5 @@ conx.on('message', function(){
 plugin.on('message', function(message){
   conx.message(message);
 });
+
+plugin.on('error', console.error);
