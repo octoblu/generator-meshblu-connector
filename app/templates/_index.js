@@ -1,7 +1,34 @@
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 
-function Plugin(){
+var MESSAGE_SCHEMA = {
+  type: 'object',
+  properties: {
+    exampleBoolean: {
+      type: 'boolean',
+      required: true
+    },
+    exampleString: {
+      type: 'string',
+      required: true
+    }
+  }
+};
+
+var OPTIONS_SCHEMA = {
+  type: 'object',
+  properties: {
+    firstExampleOption: {
+      type: 'string',
+      required: true
+    }
+  }
+};
+
+function Plugin(options){
+  this.setOptions(options);
+  this.messageSchema = MESSAGE_SCHEMA;
+  this.optionsSchema = OPTIONS_SCHEMA;
   return this;
 }
 util.inherits(Plugin, EventEmitter);
@@ -11,6 +38,12 @@ Plugin.prototype.onMessage = function(message){
   this.emit('message', {devices: ['*'], topic: 'echo', payload: data});
 };
 
+Plugin.prototype.setOptions = function(options){
+  this.options = options;
+};
+
 module.exports = {
+  messageSchema: MESSAGE_SCHEMA,
+  optionsSchema: OPTIONS_SCHEMA,
   Plugin: Plugin
 };
