@@ -25,8 +25,8 @@ var OPTIONS_SCHEMA = {
   }
 };
 
-function Plugin(options){
-  this.setOptions(options);
+function Plugin(){
+  this.options = {};
   this.messageSchema = MESSAGE_SCHEMA;
   this.optionsSchema = OPTIONS_SCHEMA;
   return this;

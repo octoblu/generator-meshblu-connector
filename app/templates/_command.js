@@ -22,7 +22,8 @@ conx.on('ready', function(){
     uuid: config.uuid,
     token: config.token,
     messageSchema: plugin.messageSchema,
-    optionsSchema: plugin.optionsSchema
+    optionsSchema: plugin.optionsSchema,
+    options:       plugin.options
   });
 });
 
