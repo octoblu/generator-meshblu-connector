@@ -37,6 +37,15 @@ conx.on('message', function(){
   }
 });
 
+conx.on('config', function(){
+  try {
+    plugin.onConfig.apply(plugin, arguments);
+  } catch (error){
+    console.error(error.message);
+    console.error(error.stack);
+  }
+});
+
 plugin.on('message', function(message){
   conx.message(message);
 });

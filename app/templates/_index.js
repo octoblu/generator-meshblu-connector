@@ -39,6 +39,10 @@ Plugin.prototype.onMessage = function(message){
   this.emit('message', {devices: ['*'], topic: 'echo', payload: payload});
 };
 
+Plugin.prototype.onConfig = function(device){
+  self.setOptions(device.options||{});
+};
+
 Plugin.prototype.setOptions = function(options){
   this.options = options;
 };
