@@ -1,11 +1,13 @@
 {
   "name": "<%= _.slugify(connectorName) %>",
+  "repository": "octoblu/<%= _.slugify(connectorName) %>",
   "version": "1.0.0",
   "scripts": {
     "start": "node command.js"
   },
   "dependencies": {
-    "skynet": "^1.1.1"
+    "skynet": "^1.8.3",
+    "debug": "^2.1.0"
   },
   "keywords": [
     "meshblu-connector",

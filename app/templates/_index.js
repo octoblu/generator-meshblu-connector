@@ -1,6 +1,7 @@
 'use strict';
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
+var debug = require('debug')('<%= _.slugify(connectorName) %>')
 
 var MESSAGE_SCHEMA = {
   type: 'object',
@@ -40,7 +41,7 @@ Plugin.prototype.onMessage = function(message){
 };
 
 Plugin.prototype.onConfig = function(device){
-  self.setOptions(device.options||{});
+  this.setOptions(device.options||{});
 };
 
 Plugin.prototype.setOptions = function(options){

@@ -1,6 +1,6 @@
 {
   "name": "generator-meshblu-connector",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Generate a meshblu connector",
   "license": "MIT",
   "main": "app/index.js",
