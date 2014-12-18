@@ -1,7 +1,13 @@
 language: node_js
 node_js:
-  - '0.10'
-before_install:
-  - currentfolder=${PWD##*/}
-  - if [ "$currentfolder" != 'generator-meshblu-connector' ]; then cd .. && eval "mv $currentfolder generator-meshblu-connector" && cd generator-meshblu-connector; fi
-
+- '0.10'
+deploy:
+  provider: npm
+  skip_cleanup: true
+  clean_up: false
+  email: jade.meskill@gmail.com
+  api_key:
+    secure: FPxssdbiH+gRSsZ/m2/X+sOEOXGMxLHkQegeAp+/kiI1IyVRzq5HNJRK39VisElLy4HTZJ7OlC+tcHkNMjDkgr1lNZGn/ZNfwOcGxcAN4MviQrTQIWdysIwMnOLcwCzdlfgCAba60Pcag3fTKv4GBhBLJh+KC8upZIM5+oh7two=
+  on:
+    tags: true
+    all_branches: true
