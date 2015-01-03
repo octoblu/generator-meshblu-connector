@@ -13,7 +13,7 @@ var Connector = function(config) {
   var consoleError = function(error) {
     console.error(error.message);
     console.error(error.stack);
-  }
+  };
 
   process.on('uncaughtException', consoleError);
   conx.on('notReady', consoleError);
@@ -57,6 +57,6 @@ var Connector = function(config) {
   });
 
   plugin.on('error', consoleError);
-}
+};
 
 module.exports = Connector;
