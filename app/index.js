@@ -38,7 +38,7 @@ var MeshbluConnectorGenerator = yeoman.generators.Base.extend({
 
   writing: {
     app: function () {
-      this.template('_package.json', 'package.json');
+      this.src.template('_package.json', 'package.json');
       this.src.template('_index.js', 'index.js');
       this.src.copy('_command.js', 'command.js');
       this.src.copy('_gitignore', '.gitignore');
