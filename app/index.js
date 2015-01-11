@@ -3,6 +3,12 @@ var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 
 var MeshbluConnectorGenerator = yeoman.generators.Base.extend({
+  constructor: function () {
+    yeoman.generators.Base.apply(this, arguments);
+
+    this.option('coffee');
+  },
+
   initializing: function () {
     this.pkg = require('../package.json');
   },
@@ -36,12 +42,22 @@ var MeshbluConnectorGenerator = yeoman.generators.Base.extend({
 
   writing: {
     app: function () {
-      this.template('_package.json', 'package.json');
-      this.template('_index.js', 'index.js');
-      this.copy('_command.js', 'command.js');
-      this.copy('_gitignore', '.gitignore');
+      if(this.options.coffee){
+        this.template('_package.coffee.json', 'package.json');
+        this.template('_index.coffee.js', 'index.js');
+        this.template('_index.coffee', 'index.coffee');
+        this.copy('_command.coffee.js', 'command.js');
+        this.copy('_command.coffee', 'command.coffee');
+        this.copy('_gitignore_coffee', '.gitignore');
+        this.copy('_connector.coffee', 'connector.coffee');
+      } else {
+        this.template('_package.json', 'package.json');
+        this.template('_index.js', 'index.js');
+        this.copy('_command.js', 'command.js');
+        this.copy('_gitignore', '.gitignore');
+        this.copy('_connector.js', 'connector.js');
+      }
       this.copy('_meshblu.json', 'meshblu.json');
-      this.copy('_connector.js', 'connector.js');
     }
   },
 
