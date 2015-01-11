@@ -6,7 +6,7 @@
     "start": "node command.js"
   },
   "dependencies": {
-    "meshblu": "^1.8.3",
+    "meshblu": "^1.9.0",
     "debug": "^2.1.0"
   },
   "keywords": [
