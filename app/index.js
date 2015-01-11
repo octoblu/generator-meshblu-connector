@@ -1,6 +1,4 @@
 'use strict';
-var util = require('util');
-var path = require('path');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 
@@ -38,12 +36,12 @@ var MeshbluConnectorGenerator = yeoman.generators.Base.extend({
 
   writing: {
     app: function () {
-      this.src.template('_package.json', 'package.json');
-      this.src.template('_index.js', 'index.js');
-      this.src.copy('_command.js', 'command.js');
-      this.src.copy('_gitignore', '.gitignore');
-      this.src.copy('_meshblu.json', 'meshblu.json');
-      this.src.copy('_connector.js', 'connector.js');
+      this.template('_package.json', 'package.json');
+      this.template('_index.js', 'index.js');
+      this.copy('_command.js', 'command.js');
+      this.copy('_gitignore', '.gitignore');
+      this.copy('_meshblu.json', 'meshblu.json');
+      this.copy('_connector.js', 'connector.js');
     }
   },
 
