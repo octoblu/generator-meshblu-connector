@@ -3,7 +3,8 @@
   "repository": "octoblu/<%= _.slugify(connectorName) %>",
   "version": "1.0.0",
   "scripts": {
-    "start": "node command.js"
+    "start": "node command.js",
+    "test": "exit 0"
   },
   "dependencies": {
     "coffee-script": "^1.8.0",
