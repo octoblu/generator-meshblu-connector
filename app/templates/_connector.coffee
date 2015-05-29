@@ -47,10 +47,15 @@ class Connector extends EventEmitter
   run: =>
     @plugin = new Plugin();
     @createConnection()
+    @plugin.on 'data', (data) =>
+      @emit 'data.send', data
+      @conx.data data
+
+    @plugin.on 'error', @consoleError
+
     @plugin.on 'message', (message) =>
       @emit 'message.send', message
       @conx.message message
-    @plugin.on 'error', @consoleError
 
   consoleError: (error) =>
     @emit 'error', error

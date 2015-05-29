@@ -74,11 +74,17 @@ Connector.prototype.run = function(){
   var self = this;
   self.plugin = new Plugin();
   self.createConnection()
+  self.plugin.on('data', function(data){
+    self.emit('data.send', data);
+    self.conx.data(data);
+  });
+
+  self.plugin.on('error', self.consoleError);
+
   self.plugin.on('message', function(message){
     self.emit('message.send', message);
     self.conx.message(message);
   });
-  self.plugin.on('error', self.consoleError);
 };
 
 Connector.prototype.consoleError = function(error){
@@ -86,6 +92,5 @@ Connector.prototype.consoleError = function(error){
   self.emit('error', error);
   console.error(error);
 };
-
 
 module.exports = Connector;
