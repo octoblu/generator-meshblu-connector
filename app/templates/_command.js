@@ -2,4 +2,5 @@
 var config = require('./meshblu.json');
 var Connector = require('./connector');
 
-new Connector(config);
+var connector = new Connector(config);
+connector.run();

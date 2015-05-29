@@ -2,6 +2,7 @@
   "name": "<%= _.slugify(connectorName) %>",
   "repository": "octoblu/<%= _.slugify(connectorName) %>",
   "version": "1.0.0",
+  "main": "connector.js",
   "scripts": {
     "start": "node command.js",
     "test": "exit 0"

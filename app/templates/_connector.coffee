@@ -1,48 +1,59 @@
 meshblu  = require 'meshblu'
+{EventEmitter} = require 'events'
 {Plugin} = require './index'
 
-Connector = (config) ->
-  conx = meshblu.createConnection
-    server : config.server
-    port   : config.port
-    uuid   : config.uuid
-    token  : config.token
+class Connector extends EventEmitter
+  constructor: (@config={}) ->
+    process.on 'uncaughtException', @consoleError
 
-  consoleError = (error) ->
-    console.error error.message
-    console.error error.stack
+  createConnection: =>
+    @conx = meshblu.createConnection
+      server : @config.server
+      port   : @config.port
+      uuid   : @config.uuid
+      token  : @config.token
 
-  process.on 'uncaughtException', consoleError
-  conx.on 'notReady', consoleError
-  conx.on 'error', consoleError
+    @conx.on 'notReady', @consoleError
+    @conx.on 'error', @consoleError
 
-  plugin = new Plugin();
+    @conx.on 'ready', @onReady
+    @conx.on 'message', @onMessage
+    @conx.on 'config', @onConfig
 
-  conx.on 'ready', ->
-    conx.whoami uuid: config.uuid, (device) ->
-      plugin.setOptions device.options
-      conx.update
-        uuid:          config.uuid,
-        token:         config.token,
-        messageSchema: plugin.messageSchema,
-        optionsSchema: plugin.optionsSchema,
-        options:       plugin.options
-
-  conx.on 'message', ->
+  onConfig: (device) =>
+    @emit 'config', device
     try
-      plugin.onMessage arguments...
+      @plugin.onConfig arguments...
     catch error
-      consoleError error
+      @consoleError error
 
-  conx.on 'config', ->
+  onMessage: (message) =>
+    @emit 'message.recieve', message
     try
-      plugin.onConfig arguments...
+      @plugin.onMessage arguments...
     catch error
-      consoleError error
+      @consoleError error
 
-  plugin.on 'message', (message) ->
-    conx.message message
+  onReady: =>
+    @conx.whoami uuid: @config.uuid, (device) =>
+      @plugin.setOptions device.options
+      @conx.update
+        uuid:          @config.uuid,
+        token:         @config.token,
+        messageSchema: @plugin.messageSchema,
+        optionsSchema: @plugin.optionsSchema,
+        options:       @plugin.options
 
-  plugin.on 'error', consoleError
+  run: =>
+    @plugin = new Plugin();
+    @createConnection()
+    @plugin.on 'message', (message) =>
+      @emit 'message.send', message
+      @conx.message message
+    @plugin.on 'error', @consoleError
+
+  consoleError: (error) =>
+    @emit 'error', error
+    console.error error
 
 module.exports = Connector;
