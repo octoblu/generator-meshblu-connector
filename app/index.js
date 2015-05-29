@@ -57,7 +57,9 @@ var MeshbluConnectorGenerator = yeoman.generators.Base.extend({
         this.copy('_gitignore', '.gitignore');
         this.copy('_connector.js', 'connector.js');
       }
+      this.template('_appveyor.yml', 'appveyor.yml');
       this.copy('_meshblu.json', 'meshblu.json');
+      this.copy('_skip-install.js', 'skip-install.js');
     }
   },
 
