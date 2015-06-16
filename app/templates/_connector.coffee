@@ -51,14 +51,13 @@ class Connector extends EventEmitter
       @emit 'data.send', data
       @conx.data data
 
-    @plugin.on 'error', @consoleError
+    @plugin.on 'error', @emitError
 
     @plugin.on 'message', (message) =>
       @emit 'message.send', message
       @conx.message message
 
-  consoleError: (error) =>
+  emitError: (error) =>
     @emit 'error', error
-    console.error error
 
 module.exports = Connector;
