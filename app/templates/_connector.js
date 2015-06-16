@@ -13,8 +13,8 @@ var Connector = function(config){
   self.onMessage = bind(self.onMessage, self);
   self.onConfig = bind(self.onConfig, self);
   self.run = bind(self.run, self);
-  self.consoleError = bind(self.consoleError, self);
-  process.on('uncaughtException', self.consoleError);
+  self.emitError = bind(self.emitError, self);
+  process.on('uncaughtException', self.emitError);
   return self;
 };
 
@@ -28,8 +28,8 @@ Connector.prototype.createConnection = function(){
     uuid   : self.config.uuid,
     token  : self.config.token
   });
-  self.conx.on('notReady', self.consoleError);
-  self.conx.on('error', self.consoleError);
+  self.conx.on('notReady', self.emitError);
+  self.conx.on('error', self.emitError);
 
   self.conx.on('ready', self.onReady);
   self.conx.on('message', self.onMessage);
@@ -42,7 +42,7 @@ Connector.prototype.onConfig = function(device){
   try{
     self.plugin.onConfig.apply(self.plugin, arguments);
   }catch(error){
-    self.consoleError(error);
+    self.emitError(error);
   }
 };
 
@@ -52,7 +52,7 @@ Connector.prototype.onMessage = function(message){
   try{
     self.plugin.onMessage.apply(self.plugin, arguments);
   }catch(error){
-    self.consoleError(error);
+    self.emitError(error);
   }
 };
 
