@@ -1,6 +1,6 @@
 {
   "name": "generator-meshblu-connector",
-  "version": "4.1.1",
+  "version": "5.0.0",
   "description": "Generate a meshblu connector",
   "license": "MIT",
   "main": "app/index.js",
@@ -23,8 +23,10 @@
     "yeoman-generator"
   ],
   "dependencies": {
-    "yeoman-generator": "^0.18.0",
     "chalk": "^1.0.0",
+    "coffee-script": "^1.10.0",
+    "lodash": "^3.10.1",
+    "yeoman-generator": "^0.18.10",
     "yosay": "^0.3.0"
   },
   "devDependencies": {
