@@ -20,6 +20,7 @@ deploy:
     on:
       tags: true
       all_branches: true
+      node: '0.10'
   - provider: npm
     skip_cleanup: true
     clean_up: false

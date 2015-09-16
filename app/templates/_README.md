@@ -34,6 +34,7 @@ deploy:
     on:
       tags: true
       all_branches: true
+      node: '0.10'
 ```
 
 #### Travis (NPM Deploy)[http://docs.travis-ci.com/user/deployment/npm/]
@@ -55,6 +56,7 @@ deploy:
     on:
       tags: true
       all_branches: true
+      node: '0.11'
 ```
 
 ### Usage
