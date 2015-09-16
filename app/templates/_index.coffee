@@ -27,12 +27,12 @@ class Plugin extends EventEmitter
     @optionsSchema = OPTIONS_SCHEMA
 
   onMessage: (message) =>
-    payload = message.payload;
+    payload = message.payload
     response =
       devices: ['*']
       topic: 'echo'
       payload: payload
-    this.emit 'message', response
+    @emit 'message', response
 
   onConfig: (device) =>
     @setOptions device.options

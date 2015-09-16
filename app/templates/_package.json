@@ -17,6 +17,12 @@
     "tar",
     "fstream"
   ],
+  "platformDependencies": {
+    "darwin": [],
+    "win32": [],
+    "win64": [],
+    "linux": []
+  },
   "keywords": [
     "meshblu-connector",
     "gateblu"

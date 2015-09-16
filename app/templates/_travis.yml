@@ -1,0 +1,29 @@
+language: node_js
+node_js:
+- '0.10'
+- '0.11'
+before_deploy:
+  - npm install ws browserify coffeeify
+  - mkdir -p deploy/<%= _.slugify(connectorName) %>/latest
+  - mkdir -p deploy/<%= _.slugify(connectorName) %>/$TRAVIS_TAG
+  - node_modules/.bin/browserify -t coffeeify -s Connector connector.js > deploy/<%= _.slugify(connectorName) %>/latest/<%= _.slugify(connectorName) %>.js
+  - gzip deploy/<%= _.slugify(connectorName) %>/latest/<%= _.slugify(connectorName) %>.js
+  - mv deploy/<%= _.slugify(connectorName) %>/latest/<%= _.slugify(connectorName) %>.js.gz deploy/<%= _.slugify(connectorName) %>/latest/<%= _.slugify(connectorName) %>.js
+  - cp deploy/<%= _.slugify(connectorName) %>/latest/<%= _.slugify(connectorName) %>.js deploy/<%= _.slugify(connectorName) %>/$TRAVIS_TAG/<%= _.slugify(connectorName) %>.js
+deploy:
+  - provider: s3
+    region: us-west-2
+    skip_cleanup: true
+    detect_encoding: true
+    local-dir: deploy
+    upload-dir: js
+    on:
+      tags: true
+      all_branches: true
+  - provider: npm
+    skip_cleanup: true
+    clean_up: false
+    on:
+      tags: true
+      all_branches: true
+      node: '0.11'

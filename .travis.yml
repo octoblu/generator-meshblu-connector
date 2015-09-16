@@ -1,14 +1,13 @@
-sudo: false
 language: node_js
 node_js:
-- '0.10'
+- '0.11'
 deploy:
   provider: npm
   skip_cleanup: true
   clean_up: false
-  email: jade.meskill@gmail.com
+  email: serveradmin@octoblu.com
   api_key:
-    secure: FPxssdbiH+gRSsZ/m2/X+sOEOXGMxLHkQegeAp+/kiI1IyVRzq5HNJRK39VisElLy4HTZJ7OlC+tcHkNMjDkgr1lNZGn/ZNfwOcGxcAN4MviQrTQIWdysIwMnOLcwCzdlfgCAba60Pcag3fTKv4GBhBLJh+KC8upZIM5+oh7two=
+    secure: "DXC0bhtu5SGl81iiybphiY38HWURK7m3wN689ozHlNGRdlmPqsNFfN5KXxyU2OZ2MH/E5sYLMQ9jvHoU1/w5Qar+LSA1O3T4o+bgpXGH92prhj4supOyJgOwOKtTYKahyJqG0FCI3C28WgNch2YY7KKSBGYc8NhirxT7cnJGwts="
   on:
     tags: true
     all_branches: true

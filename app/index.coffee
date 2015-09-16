@@ -43,6 +43,7 @@ MeshbluConnectorGenerator = yeoman.generators.Base.extend
         @copy '_command.coffee', 'command.coffee'
         @copy '_gitignore_coffee', '.gitignore'
         @copy '_connector.coffee', 'connector.coffee'
+        @copy '_connector.coffee.js', 'connector.js'
       else
         @template '_package.json', 'package.json'
         @template '_index.js', 'index.js'
@@ -51,8 +52,11 @@ MeshbluConnectorGenerator = yeoman.generators.Base.extend
         @copy '_connector.js', 'connector.js'
 
       @template '_appveyor.yml', 'appveyor.yml'
+      @template '_travis.yml', 'travis.yml'
       @copy '_meshblu.json', 'meshblu.json'
       @copy '_skip-install.js', 'skip-install.js'
+      @copy '_npmignore', '.npmignore'
+      @copy '_README.md', 'README.md'
 
   end: ->
     @installDependencies bower: false

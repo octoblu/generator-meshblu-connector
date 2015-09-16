@@ -1,6 +1,6 @@
 {
   "server" : "meshblu.octoblu.com",
-  "port"   : 80,
+  "port"   : 443,
   "uuid"   : "",
   "token"  : ""
 }

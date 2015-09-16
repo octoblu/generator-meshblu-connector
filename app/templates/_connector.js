@@ -14,7 +14,13 @@ var Connector = function(config){
   self.onConfig = bind(self.onConfig, self);
   self.run = bind(self.run, self);
   self.emitError = bind(self.emitError, self);
-  process.on('uncaughtException', self.emitError);
+  if(!process){
+    return;
+  }
+  process.on('uncaughtException', function(error){
+    self.emitError(error);
+    process.exit(1);
+  });
   return self;
 };
 
@@ -80,6 +86,11 @@ Connector.prototype.run = function(){
   });
 
   self.plugin.on('error', self.emitError);
+
+  self.plugin.on('update', function(properties){
+    self.emit('update', properties);
+    self.conx.update(properties);
+  });
 
   self.plugin.on('message', function(message){
     self.emit('message.send', message);
