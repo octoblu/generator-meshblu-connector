@@ -45,6 +45,7 @@ class Connector extends EventEmitter
         messageSchema: @plugin.messageSchema,
         optionsSchema: @plugin.optionsSchema,
         options:       @plugin.options
+        initializing:  false
 
   run: =>
     @plugin = new Plugin();

@@ -67,11 +67,12 @@ Connector.prototype.onReady = function(){
   self.conx.whoami({uuid: self.config.uuid}, function(device){
     self.plugin.setOptions(device.options || {});
     self.conx.update({
-      uuid: self.config.uuid,
-      token: self.config.token,
+      uuid:          self.config.uuid,
+      token:         self.config.token,
       messageSchema: self.plugin.messageSchema,
       optionsSchema: self.plugin.optionsSchema,
-      options: self.plugin.options
+      options:       self.plugin.options
+      initializing:  false
     });
   });
 };
