@@ -52,7 +52,7 @@ MeshbluConnectorGenerator = yeoman.generators.Base.extend
         @copy '_connector.js', 'connector.js'
 
       @template '_appveyor.yml', 'appveyor.yml'
-      @template '_travis.yml', 'travis.yml'
+      @template '_travis.yml', '.travis.yml'
       @copy '_meshblu.json', 'meshblu.json'
       @copy '_skip-install.js', 'skip-install.js'
       @copy '_npmignore', '.npmignore'
