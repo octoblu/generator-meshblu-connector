@@ -71,7 +71,7 @@ Connector.prototype.onReady = function(){
       token:         self.config.token,
       messageSchema: self.plugin.messageSchema,
       optionsSchema: self.plugin.optionsSchema,
-      options:       self.plugin.options
+      options:       self.plugin.options,
       initializing:  false
     });
   });
