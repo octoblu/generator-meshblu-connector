@@ -25,6 +25,7 @@
     "android": [],
     "ios": []
   },
+  "license": "MIT",
   "keywords": [
     "meshblu-connector",
     "gateblu"

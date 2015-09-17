@@ -1,7 +1,8 @@
 language: node_js
 node_js:
 - '0.10'
-- '0.11'
+before_install:
+  - npm install npm -g
 before_deploy:
   - npm install ws browserify coffeeify
   - mkdir -p deploy/<%= _.slugify(connectorName) %>/latest
@@ -15,16 +16,21 @@ deploy:
     region: us-west-2
     skip_cleanup: true
     detect_encoding: true
+    access_key_id: replace-me
+    secret_access_key:
+      secure: replace-me
+    bucket: octoblu-cdn
     local-dir: deploy
     upload-dir: js
     on:
       tags: true
       all_branches: true
-      node: '0.10'
   - provider: npm
     skip_cleanup: true
     clean_up: false
+    email: replace-me
+    api_key:
+      secure: replace-me
     on:
       tags: true
       all_branches: true
-      node: '0.11'

@@ -57,6 +57,7 @@ MeshbluConnectorGenerator = yeoman.generators.Base.extend
       @copy '_skip-install.js', 'skip-install.js'
       @copy '_npmignore', '.npmignore'
       @copy '_README.md', 'README.md'
+      @copy '_LICENSE', 'LICENSE'
 
   end: ->
     @installDependencies bower: false
