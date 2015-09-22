@@ -13,7 +13,7 @@ echo "Updating meshblu-hue-light"
 ./auto-update meshblu-hue-light
 echo "Updating meshblu-drone-army"
 ./auto-update meshblu-drone-army
-"Updating meshblu-alljoyn"
+echo "Updating meshblu-alljoyn"
 ./auto-update meshblu-alljoyn
 echo "Updating meshblu-aim"
 ./auto-update meshblu-aim
@@ -51,3 +51,39 @@ echo "Updating meshblu-shell"
 ./auto-update meshblu-shell
 echo "Updating meshblu-sonos"
 ./auto-update meshblu-sonos
+echo "Updating meshblu-blendmicro"
+./auto-update meshblu-blendmicro
+echo "Updating meshblu-mac-vhid"
+./auto-update meshblu-mac-vhid
+echo "Updating meshblu-wemo" # I AM HERE
+./auto-update meshblu-wemo
+echo "Updating meshblu-greeting"
+./auto-update meshblu-greeting
+echo "Updating meshblu-blinky-tape"
+./auto-update meshblu-blinky-tape
+echo "Updating meshblu-lumencache"
+./auto-update meshblu-lumencache
+echo "Updating meshblu-cam"
+./auto-update meshblu-cam
+echo "Updating meshblu-twitter-stream"
+./auto-update meshblu-twitter-stream
+echo "Updating meshblu-relayr"
+./auto-update meshblu-relayr
+echo "Updating meshblu-giphy"
+./auto-update meshblu-giphy
+echo "Updating meshblu-git-run"
+./auto-update meshblu-git-run
+echo "Updating meshblu-oculus"
+./auto-update meshblu-oculus
+echo "Updating meshblu-sensoria"
+./auto-update meshblu-sensoria
+echo "Updating meshblu-meshlium"
+./auto-update meshblu-meshlium
+echo "Updating meshblu-gotomeeting-osa"
+./auto-update meshblu-gotomeeting-osa
+echo "Updating meshblu-echo"
+./auto-update meshblu-echo
+echo "Updating meshblu-xbee"
+./auto-update meshblu-xbee
+echo "Updating meshblu-banjocanyon"
+./auto-update meshblu-banjocanyon
