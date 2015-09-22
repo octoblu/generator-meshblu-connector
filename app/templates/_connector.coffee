@@ -1,6 +1,8 @@
-meshblu  = require 'meshblu'
+_              = require 'lodash'
+meshblu        = require 'meshblu'
+packageJSON    = require './package.json'
 {EventEmitter} = require 'events'
-{Plugin} = require './index.coffee'
+{Plugin}       = require './index.coffee'
 
 class Connector extends EventEmitter
   constructor: (@config={}) ->
@@ -39,13 +41,17 @@ class Connector extends EventEmitter
   onReady: =>
     @conx.whoami uuid: @config.uuid, (device) =>
       @plugin.setOptions device.options
+      oldRecentVersions = device.recentVersions || [];
+      recentVersions = _.union oldRecentVersions, [packageJSON.version]
       @conx.update
-        uuid:          @config.uuid,
-        token:         @config.token,
-        messageSchema: @plugin.messageSchema,
-        optionsSchema: @plugin.optionsSchema,
+        uuid:          @config.uuid
+        token:         @config.token
+        messageSchema: @plugin.messageSchema
+        optionsSchema: @plugin.optionsSchema
         options:       @plugin.options
         initializing:  false
+        currentVersion: packageJSON.version
+        recentVersions: recentVersions
 
   run: =>
     @plugin = new Plugin();

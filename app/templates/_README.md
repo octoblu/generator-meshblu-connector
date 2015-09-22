@@ -1,5 +1,11 @@
 ## <%= _.slugify(connectorName) %>
 
+[![Build Status](https://travis-ci.org/octoblu/<%= _.slugify(connectorName) %>.svg?branch=master)](https://travis-ci.org/octoblu/<%= _.slugify(connectorName) %>)
+[![Code Climate](https://codeclimate.com/github/octoblu/<%= _.slugify(connectorName) %>/badges/gpa.svg)](https://codeclimate.com/github/octoblu/<%= _.slugify(connectorName) %>)
+[![Test Coverage](https://codeclimate.com/github/octoblu/<%= _.slugify(connectorName) %>/badges/coverage.svg)](https://codeclimate.com/github/octoblu/<%= _.slugify(connectorName) %>)
+[![npm version](https://badge.fury.io/js/<%= _.slugify(connectorName) %>.svg)](http://badge.fury.io/js/<%= _.slugify(connectorName) %>)
+[![Gitter](https://badges.gitter.im/octoblu/help.svg)](https://gitter.im/octoblu/help)
+
 A Meshblu connector for use in Octoblu or with other services.
 
 ### Setup Instructions

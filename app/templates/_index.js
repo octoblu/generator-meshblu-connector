@@ -28,24 +28,28 @@ var OPTIONS_SCHEMA = {
 };
 
 function Plugin(){
-  this.options = {};
-  this.messageSchema = MESSAGE_SCHEMA;
-  this.optionsSchema = OPTIONS_SCHEMA;
-  return this;
+  var self = this;
+  self.options = {};
+  self.messageSchema = MESSAGE_SCHEMA;
+  self.optionsSchema = OPTIONS_SCHEMA;
+  return self;
 }
 util.inherits(Plugin, EventEmitter);
 
 Plugin.prototype.onMessage = function(message){
+  var self = this;
   var payload = message.payload;
-  this.emit('message', {devices: ['*'], topic: 'echo', payload: payload});
+  self.emit('message', {devices: ['*'], topic: 'echo', payload: payload});
 };
 
 Plugin.prototype.onConfig = function(device){
-  this.setOptions(device.options||{});
+  var self = this;
+  self.setOptions(device.options||{});
 };
 
 Plugin.prototype.setOptions = function(options){
-  this.options = options;
+  var self = this;
+  self.options = options;
 };
 
 module.exports = {

@@ -1,4 +1,3 @@
-meshblu.json
 node_modules
 npm-debug.log
 
@@ -6,3 +5,5 @@ npm-debug.log
 .DS_Store
 *.swp
 *.swo
+meshblu.json
+deploy

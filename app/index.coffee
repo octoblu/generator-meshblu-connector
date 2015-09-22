@@ -36,30 +36,29 @@ MeshbluConnectorGenerator = yeoman.generators.Base.extend
   writing:
     app: ->
       if @options.coffee
-        @template '_package.coffee.json', 'package.json'
         @template '_index.coffee.js', 'index.js'
         @template '_index.coffee', 'index.coffee'
         @copy '_command.coffee.js', 'command.js'
         @copy '_command.coffee', 'command.coffee'
-        @copy '_gitignore_coffee', '.gitignore'
         @copy '_connector.coffee', 'connector.coffee'
         @copy '_connector.coffee.js', 'connector.js'
       else
-        @template '_package.json', 'package.json'
         @template '_index.js', 'index.js'
         @copy '_command.js', 'command.js'
-        @copy '_gitignore', '.gitignore'
         @copy '_connector.js', 'connector.js'
 
+      @template '_package.json', 'package.json'
       @template '_appveyor.yml', 'appveyor.yml'
       @template '_travis.yml', '.travis.yml'
-      @copy '_meshblu.json', 'meshblu.json'
+      @copy '_gitignore', '.gitignore'
       @copy '_skip-install.js', 'skip-install.js'
       @copy '_npmignore', '.npmignore'
       @copy '_README.md', 'README.md'
       @copy '_LICENSE', 'LICENSE'
 
-  end: ->
-    @installDependencies bower: false
+  install: ->
+    dependencies = ['meshblu', 'meshblu-config', 'lodash', 'debug']
+    dependencies.push 'coffee-script' if @options.coffee
+    @npmInstall dependencies, save: true
 
 module.exports = MeshbluConnectorGenerator
