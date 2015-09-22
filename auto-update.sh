@@ -1,7 +1,13 @@
 #!/bin/bash
 CONNECTOR=$1
+if [ -z "$1" ]; then
+  echo "ERROR: Must include meshblu-connector"
+  echo "Usage: ./auto-update.sh [meshblu-connector]"
+  exit 1
+fi
+
 echo "* running for connector: $CONNECTOR"
-cd $CONNECTOR
+cd ~/Projects/Octoblu/$CONNECTOR
 COMMAND='yo meshblu-connector'
 if [ -f './index.coffee' ]; then
   echo "* it is coffee"
