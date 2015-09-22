@@ -35,8 +35,8 @@
 # ./auto-update meshblu-device-discoverer
 # echo "Updating meshblu-chromecast"
 # ./auto-update meshblu-chromecast
-echo "Updating meshblu-blink1"
-./auto-update meshblu-blink1
+# echo "Updating meshblu-blink1"
+# ./auto-update meshblu-blink1
 # Do by hand
 #echo "Updating meshblu-arduino"
 #./auto-update meshblu-arduino

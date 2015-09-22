@@ -7,8 +7,14 @@ if [ -z "$1" ]; then
 fi
 
 echo "* running for connector: $CONNECTOR"
+if [ -f "~/Projects/Octoblu/$CONNECTOR/package.json"]; then
+  echo "* Cloning repo"
+  cd ~/Projects/Octoblu/
+  git clone git@github.com:octoblu/$CONNECTOR.git
+fi
 cd ~/Projects/Octoblu/$CONNECTOR
 COMMAND='yo meshblu-connector'
+
 if [ -f './index.coffee' ]; then
   echo "* it is coffee"
   COMMAND="$COMMAND --coffee"
