@@ -1,0 +1,31 @@
+#!/bin/bash
+echo "Updating meshblu-osc"
+./auto-update meshblu-osc
+echo "Updating meshblu-myo"
+./auto-update meshblu-myo
+echo "Updating meshblu-lifx-light"
+./auto-update meshblu-lifx-light
+echo "Updating meshblu-hue"
+./auto-update meshblu-hue
+echo "Updating meshblu-hue-button"
+./auto-update meshblu-hue-button
+echo "Updating meshblu-hue-light"
+./auto-update meshblu-hue-light
+echo "Updating meshblu-drone-army"
+./auto-update meshblu-drone-army
+echo "Updating meshblu-alljoyn"
+./auto-update meshblu-alljoyn
+echo "Updating meshblu-aim"
+./auto-update meshblu-aim
+echo "Updating meshblu-serial"
+./auto-update meshblu-serial
+echo "Updating meshblu-http-connector"
+./auto-update meshblu-http-connector
+echo "Updating meshblu-beacon"
+./auto-update meshblu-beacon
+echo "Updating meshblu-mindwave"
+./auto-update meshblu-mindwave
+echo "Updating meshblu-citrix-receiver"
+./auto-update meshblu-citrix-receiver
+echo "Updating meshblu-discovery-master"
+./auto-update meshblu-discovery-master

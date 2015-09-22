@@ -2,7 +2,7 @@
 CONNECTOR=$1
 if [ -z "$1" ]; then
   echo "ERROR: Must include meshblu-connector"
-  echo "Usage: ./auto-update.sh [meshblu-connector]"
+  echo "Usage: ./auto-update [meshblu-connector]"
   exit 1
 fi
 
@@ -18,6 +18,9 @@ echo "* Running the generator"
 $COMMAND
 
 echo "* Upgrade done."
+
+echo "* Running app. [ctrl-c] to move to the next step..."
+npm start
 
 read -p "Are you feeling dangerous and want to push? Press [enter] to continue..."
 gump "upgraded connector"
