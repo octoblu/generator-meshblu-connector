@@ -57,7 +57,7 @@ echo "Updating meshblu-mac-vhid"
 ./auto-update meshblu-mac-vhid
 echo "Updating meshblu-wemo"
 ./auto-update meshblu-wemo
-echo "Updating meshblu-greeting" # I AM HERE
+echo "Updating meshblu-greeting"
 ./auto-update meshblu-greeting
 echo "Updating meshblu-blinky-tape"
 ./auto-update meshblu-blinky-tape
@@ -75,7 +75,7 @@ echo "Updating meshblu-git-run"
 ./auto-update meshblu-git-run
 echo "Updating meshblu-oculus"
 ./auto-update meshblu-oculus
-echo "Updating meshblu-sensoria"
+echo "Updating meshblu-sensoria" # I am here
 ./auto-update meshblu-sensoria
 echo "Updating meshblu-meshlium"
 ./auto-update meshblu-meshlium
