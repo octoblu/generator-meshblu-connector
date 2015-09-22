@@ -1,0 +1,34 @@
+#!/bin/bash
+CONNECTOR=$1
+if [ -z "$1" ]; then
+  echo "ERROR: Must include meshblu-connector"
+  echo "Usage: ./auto-update [meshblu-connector]"
+  exit 1
+fi
+
+echo "* running for connector: $CONNECTOR"
+cd ~/Projects/Octoblu
+
+if [ ! -f "./$CONNECTOR/package.json" ]; then
+  echo "* Cloning repo..."
+  git clone git@github.com:octoblu/$CONNECTOR.git
+fi
+
+cd $CONNECTOR
+echo "* Pulling..."
+git pull
+
+COMMAND='yo meshblu-connector'
+
+if [ -f './index.coffee' ]; then
+  echo "* it is coffee"
+  COMMAND="$COMMAND --coffee"
+fi
+
+echo "* Running the generator"
+$COMMAND
+
+echo "* Upgrade done."
+
+echo "* Running npm install..."
+npm install
