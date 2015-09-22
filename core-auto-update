@@ -30,5 +30,8 @@ $COMMAND
 
 echo "* Upgrade done."
 
+echo "* Enabling travis..."
+travis enable
+
 echo "* Running npm install..."
 npm install

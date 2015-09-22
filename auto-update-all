@@ -55,9 +55,9 @@ echo "Updating meshblu-blendmicro"
 ./auto-update meshblu-blendmicro
 echo "Updating meshblu-mac-vhid"
 ./auto-update meshblu-mac-vhid
-echo "Updating meshblu-wemo" # I AM HERE
+echo "Updating meshblu-wemo"
 ./auto-update meshblu-wemo
-echo "Updating meshblu-greeting"
+echo "Updating meshblu-greeting" # I AM HERE
 ./auto-update meshblu-greeting
 echo "Updating meshblu-blinky-tape"
 ./auto-update meshblu-blinky-tape
