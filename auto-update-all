@@ -75,7 +75,7 @@ echo "Updating meshblu-git-run"
 ./auto-update meshblu-git-run
 echo "Updating meshblu-oculus"
 ./auto-update meshblu-oculus
-echo "Updating meshblu-sensoria" # I am here
+echo "Updating meshblu-sensoria"
 ./auto-update meshblu-sensoria
 echo "Updating meshblu-meshlium"
 ./auto-update meshblu-meshlium
