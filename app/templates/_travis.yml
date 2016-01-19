@@ -4,10 +4,10 @@ node_js:
 before_install:
   - npm install npm -g
 before_deploy:
-  - npm install ws browserify coffeeify
+  - npm install ws browserify@12.0.2 coffeeify@2.0.1
   - mkdir -p deploy/<%= _.slugify(connectorName) %>/latest
   - mkdir -p deploy/<%= _.slugify(connectorName) %>/$TRAVIS_TAG
-  - node_modules/.bin/browserify -t coffeeify -s Connector connector.js > deploy/<%= _.slugify(connectorName) %>/latest/<%= _.slugify(connectorName) %>.js
+  - node_modules/.bin/browserify -t coffeeify -s Connector connector.coffee > deploy/<%= _.slugify(connectorName) %>/latest/<%= _.slugify(connectorName) %>.js
   - gzip deploy/<%= _.slugify(connectorName) %>/latest/<%= _.slugify(connectorName) %>.js
   - mv deploy/<%= _.slugify(connectorName) %>/latest/<%= _.slugify(connectorName) %>.js.gz deploy/<%= _.slugify(connectorName) %>/latest/<%= _.slugify(connectorName) %>.js
   - cp deploy/<%= _.slugify(connectorName) %>/latest/<%= _.slugify(connectorName) %>.js deploy/<%= _.slugify(connectorName) %>/$TRAVIS_TAG/<%= _.slugify(connectorName) %>.js
