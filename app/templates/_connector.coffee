@@ -2,20 +2,21 @@ _              = require 'lodash'
 meshblu        = require 'meshblu'
 packageJSON    = require './package.json'
 {EventEmitter} = require 'events'
-{Plugin}       = require './index.coffee'
 
 class Connector extends EventEmitter
-  constructor: (@config={}) ->
+  constructor: (@options={}, @dependencies={}) ->
+    {@Plugin} = @dependencies
+    @Plugin ?= require './index.coffee'
     process?.on 'uncaughtException', (error) =>
       @emitError error
       process?.exit 1
 
   createConnection: =>
     @conx = meshblu.createConnection
-      server : @config.server
-      port   : @config.port
-      uuid   : @config.uuid
-      token  : @config.token
+      server : @options.server
+      port   : @options.port
+      uuid   : @options.uuid
+      token  : @options.token
 
     @conx.on 'notReady', @emitError
     @conx.on 'error', @emitError
@@ -39,13 +40,13 @@ class Connector extends EventEmitter
       @emitError error
 
   onReady: =>
-    @conx.whoami uuid: @config.uuid, (device) =>
+    @conx.whoami uuid: @options.uuid, (device) =>
       @plugin.setOptions device.options
       oldRecentVersions = device.recentVersions || [];
       recentVersions = _.union oldRecentVersions, [packageJSON.version]
       @conx.update
-        uuid:          @config.uuid
-        token:         @config.token
+        uuid:          @options.uuid
+        token:         @options.token
         messageSchema: @plugin.messageSchema
         optionsSchema: @plugin.optionsSchema
         options:       @plugin.options
@@ -54,7 +55,7 @@ class Connector extends EventEmitter
         recentVersions: recentVersions
 
   run: =>
-    @plugin = new Plugin();
+    @plugin = new @Plugin();
     @createConnection()
     @plugin.on 'data', (data) =>
       @emit 'data.send', data
