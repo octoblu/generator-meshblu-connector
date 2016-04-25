@@ -40,7 +40,7 @@ before_deploy:
 deploy:
 - provider: releases
   api_key:
-    secure: [secure-api-key]
+    [github-release-key]
   file_glob: true
   file:
   - "deploy/*"
@@ -50,7 +50,7 @@ deploy:
 - provider: npm
   email: [npm-email]
   api_key:
-    secure: [secure-api-key]
+    [npm-release-key]
   on:
     tags: true
     condition: "$NPM_PUBLISH = true"

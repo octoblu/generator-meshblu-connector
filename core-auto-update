@@ -1,37 +1,40 @@
 #!/bin/bash
-CONNECTOR=$1
-if [ -z "$1" ]; then
-  echo "ERROR: Must include meshblu-connector"
-  echo "Usage: ./auto-update [meshblu-connector]"
-  exit 1
-fi
 
-echo "* running for connector: $CONNECTOR"
-cd ~/Projects/Octoblu
+usage() {
+  echo "./core-auto-update <connector-name>"
+  echo "   Connector name should not include 'meshblu-connector-' or 'meshblu-'"
+  echo "Required Enviroment"
+  echo "   env NPM_SECRET_KEY"
+  echo "   env GITHUB_RELEASE_KEY"
+  echo "   env APPVEYOR_GITHUB_RELEASE_KEY"
+}
 
-if [ ! -f "./$CONNECTOR/package.json" ]; then
-  echo "* Cloning repo..."
-  git clone git@github.com:octoblu/$CONNECTOR.git
-fi
+main() {
+  local connector="$1"
+  local npm_secret_key="$NPM_SECRET_KEY"
+  local github_release_key="$GITHUB_RELEASE_KEY"
+  local appveyor_github_key="$APPVEYOR_GITHUB_RELEASE_KEY"
 
-cd $CONNECTOR
-echo "* Pulling..."
-git pull
+  if [ -z "$connector" ]; then
+    usage
+    echo "Missing connector-name"
+    exit 1
+  fi
 
-COMMAND='yo meshblu-connector'
+  if [ -z "$npm_secret_key" ]; then
+    usage
+    echo "Missing env NPM_SECRET_KEY"
+  fi
 
-if [ -f './index.coffee' ]; then
-  echo "* it is coffee"
-  COMMAND="$COMMAND --coffee"
-fi
+  if [ -z "$github_release_key" ]; then
+    usage
+    echo "Missing env GITHUB_RELEASE_KEY"
+  fi
 
-echo "* Running the generator"
-$COMMAND
+  if [ -z "$appveyor_github_key" ]; then
+    usage
+    echo "Missing env APPVEYOR_GITHUB_RELEASE_KEY"
+  fi
+}
 
-echo "* Upgrade done."
-
-echo "* Enabling travis..."
-travis enable --no-interactive
-
-echo "* Running npm install..."
-npm install
+main "$@"
