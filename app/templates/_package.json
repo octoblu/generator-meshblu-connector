@@ -1,7 +1,7 @@
 {
   "name": "<%= appname %>",
-  "version": "1.0.0",
-  "description": "Put some description here",
+  "version": "<%= pkg.version %>",
+  "description": "<%= pkg.description %>",
   "homepage": "<%= githubUrl %>/<%= filePrefix %>",
   "bugs": "<%= githubUrl %>/<%= filePrefix %>/issues",
   "author": {
@@ -23,7 +23,6 @@
     "coffee-coverage": "^1.0.1",
     "istanbul": "^0.4.2",
     "meshblu-connector-packager": "^11.0.3",
-    "meshblu-connector-runner": "^1.0.7",
     "mocha": "^2.4.5",
     "mocha-istanbul": "^0.2.0",
     "sinon": "^1.17.3",

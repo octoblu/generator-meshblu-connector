@@ -14,15 +14,21 @@ $ npm install <%= appname %>
 
 ### Usage
 
-```javascript
-console.log('hello world!');
+```bash
+$ npm start
+```
+
+or with debug
+
+```bash
+$ env DEBUG='<%= appname %>*' npm start
 ```
 
 ## License
 
 The MIT License (MIT)
 
-Copyright 2016 Octoblu Inc.
+Copyright <%= currentYear %> Octoblu Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

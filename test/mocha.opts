@@ -1,5 +1,5 @@
---compilers coffee:coffee-script/register
+--bail
 --recursive
---reporter spec
---ui bdd
---timeout 2000
+--compilers coffee:coffee-script
+--require coffee-script/register
+--require test/test_helper.coffee

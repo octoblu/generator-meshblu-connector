@@ -14,7 +14,9 @@ class MeshbluConnectorGenerator extends yeoman.Base
     {@realname, @githubUrl} = options
     @skipInstall = options['skip-install']
     @githubUser  = options['github-user']
-    @pkg = JSON.parse htmlWiring.readFileAsString path.join __dirname, '../package.json'
+    @pkg = {}
+    try
+      @pkg = JSON.parse htmlWiring.readFileAsString path.join process.cwd(), 'package.json'
 
   initializing: =>
     @appname = _.kebabCase @appname
@@ -62,7 +64,11 @@ class MeshbluConnectorGenerator extends yeoman.Base
     appname        = "meshblu-connector-#{@noMeshbluConnector}"
     githubSlug     = helpers.githubSlug @githubUrl, appname
 
+    @pkg.version ?= '1.0.0'
+    @pkg.description ?= "Meshblu Connector #{classPrefix}"
+
     context = {
+      @currentYear
       @githubUrl
       @realname
       appname,
@@ -71,12 +77,14 @@ class MeshbluConnectorGenerator extends yeoman.Base
       classPrefix
       instancePrefix
       constantPrefix
+      @pkg
     }
 
     @template "_package.json", "package.json", context
     @template "test/_meshblu-connector-spec.coffee", "test/meshblu-connector-spec.coffee", context
     @template "test/_mocha.opts", "test/mocha.opts", context
     @template "test/_test_helper.coffee", "test/test_helper.coffee", context
+    @template "_schemas.json", "schemas.json", context
     @template "_index.coffee", "index.coffee", context
     @template "_index.js", "index.js", context
     @template "_coffeelint.json", "coffeelint.json", context

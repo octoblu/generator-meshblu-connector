@@ -1,14 +1,29 @@
 {
- 	"title": "Hello Message",
-  "type": "object",
-  "properties": {
-    "metadata": {
+  "schemas": {
+    "version": "1.0.0",
+    "messages": [
+      {
+        "title": "<%= classPrefix %>",
+        "type": "object",
+        "properties": {
+          "greeting": {
+            "type": "string"
+          }
+        }
+      }
+    ],
+    "configure": {
       "type": "object",
       "properties": {
-        "jobType": {"type":"string"}
-      },
-      "required": ["jobType"]
+        "options" : {
+          "type" : "object",
+          "properties" : {
+            "response" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
     }
-  },
-  "required": ["metadata"]
+  }
 }

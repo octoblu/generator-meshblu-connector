@@ -19,6 +19,6 @@ class Helpers
   githubSlug: (githubUrl, appname) =>
     parsedGithub = url.parse githubUrl
     parts = parsedGithub.pathname.split '/'
-    return "#{_.first(parts)}/#{appname}"
+    return "#{parts[1]}/#{appname}"
 
 module.exports = new Helpers

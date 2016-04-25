@@ -1,7 +1,7 @@
-{EventEmitter2} = require 'eventemitter2'
+{EventEmitter}  = require 'events'
 debug           = require('debug')('<%= appname %>:index')
 
-class <%= classPrefix %> extends EventEmitter2
+class <%= classPrefix %> extends EventEmitter
   constructor: ->
     debug '<%= classPrefix %> constructed'
 

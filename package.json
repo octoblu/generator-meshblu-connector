@@ -1,6 +1,6 @@
 {
   "name": "generator-meshblu-connector",
-  "version": "6.0.5",
+  "version": "7.0.0",
   "description": "A generator for Yeoman",
   "keywords": [
     "yeoman-generator"
@@ -27,8 +27,12 @@
     "yeoman-generator": "^0.22.5"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "mocha": "^2.4.5",
+    "npm": "^3.8.7",
     "rimraf": "^2.5.2",
+    "sinon": "^1.17.3",
+    "sinon-chai": "^2.8.0",
     "yeoman-assert": "^2.2.0",
     "yeoman-test": "^1.1.0"
   },
