@@ -1,36 +1,56 @@
-language: node_js
-node_js:
-- '0.10'
+language: cpp
+os:
+- linux
+- osx
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.8
+    - g++-4.8-multilib
+    - gcc-multilib
+    - build-essential
+    - libbluetooth-dev
+    - libudev-dev
+    - libusb-1.0-0-dev
+env:
+  matrix:
+  - PACKAGER_NODE_VERSION="5.5" PACKAGER_ARCH="amd64" MAIN_BUILD="true"
+  - PACKAGER_NODE_VERSION="5.5" PACKAGER_ARCH="386"
+matrix:
+  exclude:
+  - os: osx
+    env: PACKAGER_NODE_VERSION="5.5" PACKAGER_ARCH="386"
+branches:
+  only:
+  - "/^v[0-9]/"
 before_install:
-  - npm install npm -g
+- PACKAGER_URL="https://meshblu-connector.octoblu.com/tools/packager/latest"
+- curl -fsS "${PACKAGER_URL}/travis_install_node.sh" -o /tmp/travis_install_node.sh
+- chmod +x /tmp/travis_install_node.sh
+- ". /tmp/travis_install_node.sh"
+- if [ "$TRAVIS_OS_NAME" == "linux" -a "$MAIN_BUILD" == "true" ]; then export NPM_PUBLISH="true"; fi
+install:
+- npm install --build-from-source
+script:
+- npm test
 before_deploy:
-  - npm install ws browserify@12.0.2 coffeeify@2.0.1
-  - mkdir -p deploy/<%= _.slugify(connectorName) %>/latest
-  - mkdir -p deploy/<%= _.slugify(connectorName) %>/$TRAVIS_TAG
-  - node_modules/.bin/browserify -t coffeeify -s Connector connector.coffee > deploy/<%= _.slugify(connectorName) %>/latest/<%= _.slugify(connectorName) %>.js
-  - gzip deploy/<%= _.slugify(connectorName) %>/latest/<%= _.slugify(connectorName) %>.js
-  - mv deploy/<%= _.slugify(connectorName) %>/latest/<%= _.slugify(connectorName) %>.js.gz deploy/<%= _.slugify(connectorName) %>/latest/<%= _.slugify(connectorName) %>.js
-  - cp deploy/<%= _.slugify(connectorName) %>/latest/<%= _.slugify(connectorName) %>.js deploy/<%= _.slugify(connectorName) %>/$TRAVIS_TAG/<%= _.slugify(connectorName) %>.js
+- npm run package
 deploy:
-  - provider: s3
-    region: us-west-2
-    skip_cleanup: true
-    detect_encoding: true
-    access_key_id: replace-me
-    secret_access_key:
-      secure: replace-me
-    bucket: octoblu-cdn
-    local-dir: deploy
-    upload-dir: js
-    on:
-      tags: true
-      all_branches: true
-  - provider: npm
-    skip_cleanup: true
-    clean_up: false
-    email: replace-me
-    api_key:
-      secure: replace-me
-    on:
-      tags: true
-      all_branches: true
+- provider: releases
+  api_key:
+    secure: [secure-api-key]
+  file_glob: true
+  file:
+  - "deploy/*"
+  skip_cleanup: true
+  on:
+    tags: true
+- provider: npm
+  email: [npm-email]
+  api_key:
+    secure: [secure-api-key]
+  on:
+    tags: true
+    condition: "$NPM_PUBLISH = true"

@@ -1,86 +1,43 @@
-## <%= _.slugify(connectorName) %>
+# <%= appname %>
 
-[![Build Status](https://travis-ci.org/octoblu/<%= _.slugify(connectorName) %>.svg?branch=master)](https://travis-ci.org/octoblu/<%= _.slugify(connectorName) %>)
-[![Code Climate](https://codeclimate.com/github/octoblu/<%= _.slugify(connectorName) %>/badges/gpa.svg)](https://codeclimate.com/github/octoblu/<%= _.slugify(connectorName) %>)
-[![Test Coverage](https://codeclimate.com/github/octoblu/<%= _.slugify(connectorName) %>/badges/coverage.svg)](https://codeclimate.com/github/octoblu/<%= _.slugify(connectorName) %>)
-[![npm version](https://badge.fury.io/js/<%= _.slugify(connectorName) %>.svg)](http://badge.fury.io/js/<%= _.slugify(connectorName) %>)
-[![Gitter](https://badges.gitter.im/octoblu/help.svg)](https://gitter.im/octoblu/help)
+[![Dependency status](http://img.shields.io/david/octoblu/<%= appname %>.svg?style=flat)](https://david-dm.org/octoblu/<%= appname %>)
+[![devDependency Status](http://img.shields.io/david/dev/octoblu/<%= appname %>.svg?style=flat)](https://david-dm.org/octoblu/<%= appname %>#info=devDependencies)
+[![Build Status](http://img.shields.io/travis/octoblu/<%= appname %>.svg?style=flat&branch=master)](https://travis-ci.org/octoblu/<%= appname %>)
 
-A Meshblu connector for use in Octoblu or with other services.
+[![NPM](https://nodei.co/npm/<%= appname %>.svg?style=flat)](https://npmjs.org/package/<%= appname %>)
 
-### Setup Instructions
+## Installing
 
-### Travis
-
-1. `gem install travis`
-1. `travis login`
-
-#### Travis (S3)
-
-For use if you need to push your browserified version
-
-1. `travis encrypt [S3_ACCESS_KEY_SECRET]`
-1. add the generated key to the .travis.yml file under `secret_access_key` in the s3 deploy section.
-1. also add the s3 `access_key_id` to the same section
-
-End result should look like this:
-
-```yml
-deploy:
-  - provider: s3
-    access_key_id: [S3_ACCESS_KEY]
-    secret_access_key:
-      secure: [S3_ACCESS_KEY_SECRET]
-    bucket: [UPLOAD_BUCKET] # octoblu-cdn
-    region: us-west-2
-    skip_cleanup: true
-    detect_encoding: true
-    local-dir: deploy
-    upload-dir: [UPLOAD_FOLDER] # js
-    on:
-      tags: true
-      all_branches: true
-      node: '0.10'
-```
-
-#### Travis (NPM Deploy)[http://docs.travis-ci.com/user/deployment/npm/]
-
-1. `travis encrypt [NPM_ACCESS_KEY]` - this key is found in `~/.npmrc`
-1. add the generated key to the .travis.yml file under `api_key` in the npm deploy section.
-1. also add the npm `email` to the same section
-
-End result should look like this:
-
-```yml
-deploy:
-  - provider: npm
-    skip_cleanup: true
-    clean_up: false
-    email: [NPM_EMAIL]
-    api_key:
-      secure: [NPM_ACCESS_KEY]
-    on:
-      tags: true
-      all_branches: true
-      node: '0.11'
+```bash
+$ npm install <%= appname %>
 ```
 
 ### Usage
 
-#### Gateblu Installation
+```javascript
+console.log('hello world!');
+```
 
-Use (gateblu)[https://gateblu.octoblu.com/] to run this as a device.
+## License
 
-#### Manual Installation
+The MIT License (MIT)
 
-1. `npm install meshblu-util -g`
-1. `npm install <%= _.slugify(connectorName) %>` or `git clone [GIT_URL]`
-1. go into connector folder
-1. `meshblu-util register -t device:<%= _.slugify(connectorName) %> > meshblu.json`
-1. `meshblu-util claim`
-1. `npm start` or to start with debug `DEBUG='<%= _.slugify(connectorName) %>*' npm start`
+Copyright 2016 Octoblu Inc.
 
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-### Platform Dependencies
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
 
-Edit the package.json to change the platformDependencies. This will show up when installing the connector in Octoblu and Gateblu.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.

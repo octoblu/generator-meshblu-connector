@@ -1,0 +1,14 @@
+{
+ 	"title": "Hello Message",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "jobType": {"type":"string"}
+      },
+      "required": ["jobType"]
+    }
+  },
+  "required": ["metadata"]
+}

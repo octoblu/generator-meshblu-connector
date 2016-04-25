@@ -1,46 +1,21 @@
-'use strict';
-util           = require 'util'
-{EventEmitter} = require 'events'
-debug          = require('debug')('<%= _.slugify(connectorName) %>')
+{EventEmitter2} = require 'eventemitter2'
+debug           = require('debug')('<%= appname %>:index')
 
-MESSAGE_SCHEMA =
-  type: 'object'
-  properties:
-    exampleBoolean:
-      type: 'boolean'
-      required: true
-    exampleString:
-      type: 'string'
-      required: true
-
-OPTIONS_SCHEMA =
-  type: 'object'
-  properties:
-    firstExampleOption:
-      type: 'string'
-      required: true
-
-class Plugin extends EventEmitter
+class <%= classPrefix %> extends EventEmitter2
   constructor: ->
-    @options = {}
-    @messageSchema = MESSAGE_SCHEMA
-    @optionsSchema = OPTIONS_SCHEMA
+    debug '<%= classPrefix %> constructed'
+
+  close: (callback) =>
+    debug 'on close'
+    callback()
 
   onMessage: (message) =>
-    payload = message.payload
-    response =
-      devices: ['*']
-      topic: 'echo'
-      payload: payload
-    @emit 'message', response
+    debug 'onMessage', topic: message.topic
 
-  onConfig: (device) =>
-    @setOptions device.options
+  onConfig: (config) =>
+    debug 'on config', @device.uuid
 
-  setOptions: (options={}) =>
-    @options = options
+  start: (@device) =>
+    debug 'started', @device.uuid
 
-module.exports =
-  messageSchema: MESSAGE_SCHEMA
-  optionsSchema: OPTIONS_SCHEMA
-  Plugin: Plugin
+module.exports = <%= classPrefix %>

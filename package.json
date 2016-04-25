@@ -1,38 +1,43 @@
 {
   "name": "generator-meshblu-connector",
   "version": "6.0.5",
-  "description": "Generate a meshblu connector",
-  "license": "MIT",
-  "main": "app/index.js",
-  "repository": "octoblu/generator-meshblu-connector",
-  "author": {
-    "name": "Jade Meskill",
-    "email": "jade.meskill@gmail.com",
-    "url": "https://github.com/iamruinous"
-  },
-  "engines": {
-    "node": ">=0.10.0"
-  },
-  "scripts": {
-    "test": "exit 0"
-  },
-  "files": [
-    "app"
-  ],
+  "description": "A generator for Yeoman",
   "keywords": [
     "yeoman-generator"
   ],
+  "homepage": "https://github.com/octoblu/generator-meshblu-connector",
+  "bugs": "https://github.com/octoblu/generator-meshblu-connector/issues",
+  "author": {
+    "name": "Octoblu",
+    "url": "https://github.com/octoblu"
+  },
+  "main": "app/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/octoblu/generator-meshblu-connector.git"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha test/*spec.coffee"
+  },
   "dependencies": {
-    "chalk": "^1.0.0",
     "coffee-script": "^1.10.0",
-    "lodash": "^3.10.1",
-    "yeoman-generator": "^0.18.10",
-    "yosay": "^0.3.0"
+    "github": "^0.2.4",
+    "html-wiring": "^1.2.0",
+    "lodash": "^4.11.1",
+    "yeoman-generator": "^0.22.5"
   },
   "devDependencies": {
-    "mocha": "*"
+    "mocha": "^2.4.5",
+    "rimraf": "^2.5.2",
+    "yeoman-assert": "^2.2.0",
+    "yeoman-test": "^1.1.0"
   },
   "peerDependencies": {
-    "yo": ">=1.0.0"
-  }
+    "yo": "^1.7.0"
+  },
+  "engines": {
+    "node": ">=0.8.0",
+    "npm": ">=1.2.10"
+  },
+  "license": "MIT"
 }
