@@ -15,16 +15,14 @@
   },
   "scripts": {
     "start": "meshblu-connector-runner ./",
-    "test": "istanbul cover _mocha -- -R spec --require coffee-coverage/register-istanbul",
+    "test": "mocha",
     "package": "meshblu-connector-packager"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "coffee-coverage": "^1.0.1",
-    "istanbul": "^0.4.2",
     "meshblu-connector-packager": "^11.0.3",
     "mocha": "^2.4.5",
-    "mocha-istanbul": "^0.2.0",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0"
   },
