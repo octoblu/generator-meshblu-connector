@@ -1,6 +1,6 @@
 {
   "name": "generator-meshblu-connector",
-  "version": "7.0.2",
+  "version": "7.1.0",
   "description": "A generator for Yeoman",
   "keywords": [
     "yeoman-generator"

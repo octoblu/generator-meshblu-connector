@@ -24,6 +24,12 @@ or with debug
 $ env DEBUG='<%= appname %>*' npm start
 ```
 
+### Releasing
+
+```bash
+$ npm run package
+```
+
 ## License
 
 The MIT License (MIT)

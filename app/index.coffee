@@ -14,9 +14,8 @@ class MeshbluConnectorGenerator extends yeoman.Base
     {@realname, @githubUrl} = options
     @skipInstall = options['skip-install']
     @githubUser  = options['github-user']
-    @pkg = {}
-    try
-      @pkg = JSON.parse htmlWiring.readFileAsString path.join process.cwd(), 'package.json'
+    @cwd = @destinationRoot()
+    @pkg = @_readFileAsJSON 'package.json'
 
   initializing: =>
     @appname = _.kebabCase @appname
@@ -26,19 +25,23 @@ class MeshbluConnectorGenerator extends yeoman.Base
 
     prompts = [
       {
+        type: 'input'
         name: 'githubUser'
         message: 'Would you mind telling me your username on GitHub?'
         default: 'octoblu'
       },
       {
+        type: 'input'
         name: 'connectorName'
         message: 'What is the name of the connector?'
         default: @appname
+        validate: helpers.validateName
       }
     ]
 
     @prompt prompts, ({@githubUser, @connectorName}) =>
       @noMeshbluConnector = _.replace @connectorName, /^meshblu-connector-/, ''
+      @fullAppName        = "meshblu-connector-#{@noMeshbluConnector}"
       done()
 
   userInfo: =>
@@ -61,11 +64,8 @@ class MeshbluConnectorGenerator extends yeoman.Base
     instancePrefix = _.camelCase @noMeshbluConnector
     classPrefix    = _.upperFirst instancePrefix
     constantPrefix = _.toUpper _.snakeCase @noMeshbluConnector
-    appname        = "meshblu-connector-#{@noMeshbluConnector}"
+    appname        = @fullAppName
     githubSlug     = helpers.githubSlug @githubUrl, appname
-
-    @pkg.version ?= '1.0.0'
-    @pkg.description ?= "Meshblu Connector #{classPrefix}"
 
     context = {
       @currentYear
@@ -77,14 +77,16 @@ class MeshbluConnectorGenerator extends yeoman.Base
       classPrefix
       instancePrefix
       constantPrefix
-      @pkg
     }
 
-    @template "_package.json", "package.json", context
+    @_updatePkgJSON({ githubSlug }) if @pkg?
+    @template '_package.json', 'package.json', context unless @pkg?
+
     @template "test/_meshblu-connector-spec.coffee", "test/meshblu-connector-spec.coffee", context
     @template "test/_mocha.opts", "test/mocha.opts", context
     @template "test/_test_helper.coffee", "test/test_helper.coffee", context
     @template "_schemas.json", "schemas.json", context
+    @template "_command.js", "command.js", context
     @template "_index.coffee", "index.coffee", context
     @template "_index.js", "index.js", context
     @template "_coffeelint.json", "coffeelint.json", context
@@ -93,6 +95,35 @@ class MeshbluConnectorGenerator extends yeoman.Base
     @template "_README.md", "README.md", context
     @template "_LICENSE", "LICENSE", context
 
+  _updatePkgJSON: ({ githubSlug }) =>
+    templatePkg = @_readTemplateAsJSON '_update_package.json'
+    newPackage = helpers.mergeJSON({ input: @pkg, overwriteWith: templatePkg })
+    newPackage.name = @fullAppName
+    newPackage.meshbluConnector ?= {}
+    newPackage.meshbluConnector.githubSlug ?= githubSlug
+    newPackage.meshbluConnector.schemasUrl ?= "https://raw.githubusercontent.com/#{githubSlug}/v#{@pkg.version}/schemas.json"
+    return @_writeFileAsJSON(newPackage, 'package.json')
+
+  _readTemplateAsJSON: (relativePath) =>
+    fullPath = path.join __dirname, 'templates', relativePath
+    try
+      return JSON.parse htmlWiring.readFileAsString fullPath
+    catch
+      return null
+
+  _readFileAsJSON: (relativePath) =>
+    fullPath = path.join @cwd, relativePath
+    try
+      return JSON.parse htmlWiring.readFileAsString fullPath
+    catch
+      return null
+
+  _writeFileAsJSON: (jsonObj, relativePath) =>
+    fullPath = path.join @cwd, relativePath
+    try
+      return htmlWiring.writeFileFromString JSON.stringify(jsonObj, null, 2), fullPath
+    catch error
+      console.error error
 
   install: =>
     return if @skipInstall

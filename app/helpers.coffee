@@ -21,4 +21,16 @@ class Helpers
     parts = parsedGithub.pathname.split '/'
     return "#{parts[1]}/#{appname}"
 
+  mergeJSON: ({ input, overwriteWith }) =>
+    returnObj = _.cloneDeep(input)
+    _.each overwriteWith, (value, key) =>
+      if _.isPlainObject(value)
+        returnObj[key] = _.assign(returnObj[key], value)
+      return value
+    return returnObj
+
+  validateName: (connectorName) =>
+    return true if /^meshblu\-connector\-/.test connectorName
+    return 'Name must be prefixed with "meshblu-connector-"'
+
 module.exports = new Helpers

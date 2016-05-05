@@ -1,0 +1,21 @@
+{
+  "main": "index.js",
+  "scripts": {
+    "start": "meshblu-connector-runner",
+    "package": "meshblu-connector-packager"
+  },
+  "devDependencies": {
+    "meshblu-connector-packager": "^12.0.0"
+  },
+  "dependencies": {
+    "meshblu-connector-runner": "^3.0.2"
+  },
+  "platformDependencies": {
+    "darwin": [],
+    "win32": [],
+    "win64": [],
+    "linux": [],
+    "android": [],
+    "ios": []
+  }
+}

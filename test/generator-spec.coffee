@@ -10,6 +10,7 @@ DEST = path.join __dirname, '..', 'tmp', "meshblu-connector-#{GENERATOR_NAME}"
 
 describe 'Generator', ->
   before 'run the helper', (done) ->
+    @timeout 10000
     appDir = path.join __dirname, '..', 'app'
     helpers
       .run appDir
@@ -21,6 +22,8 @@ describe 'Generator', ->
       .withPrompts
         githubUser: 'sqrtofsaturn'
         connectorName: GENERATOR_NAME
+      .on 'error', (error) =>
+        done error
       .on 'end', done
 
   it 'creates expected files', ->
@@ -29,6 +32,7 @@ describe 'Generator', ->
       test/test_helper.coffee
       test/mocha.opts
       schemas.json
+      command.js
       index.coffee
       index.js
       coffeelint.json
@@ -43,6 +47,18 @@ describe 'Generator', ->
   describe 'when the package.json is written', ->
     beforeEach ->
       @pkg = require path.join @tmpDir, 'package.json'
+
+    it 'should have the correctly formatted name', ->
+      expect(/^meshblu-connector/.test(@pkg.name)).to.be.true
+
+    it 'should have meshblu-connector-runner in the dependencies', ->
+      expect(@pkg.dependencies['meshblu-connector-runner']).to.not.be.empty
+
+    it 'should have meshblu-connector-packager in the devDependencies', ->
+      expect(@pkg.devDependencies['meshblu-connector-packager']).to.not.be.empty
+
+    it 'should have main pointing to index.js', ->
+      expect(@pkg.main).to.equal 'index.js'
 
     it 'should have version 1.0.0', ->
       expect(@pkg.version).to.equal '1.0.0'
