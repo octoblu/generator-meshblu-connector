@@ -30,7 +30,8 @@
     "coffee-script": "^1.10.0",
     "debug": "^2.2.0",
     "eventemitter2": "^1.0.0",
-    "meshblu-connector-runner": "^3.0.2"
+    "meshblu-config": "^4.0.0",
+    "meshblu-connector-runner": "^4.0.1"
   },
   "meshbluConnector": {
     "githubSlug": "<%= githubSlug %>",

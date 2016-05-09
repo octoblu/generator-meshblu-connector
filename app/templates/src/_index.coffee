@@ -13,15 +13,14 @@ class <%= classPrefix %> extends EventEmitter
     callback()
 
   onMessage: (message) =>
-    return unless message?
     { topic, devices, fromUuid } = message
     return if '*' in devices
     return if fromUuid == @uuid
-    debug 'onMessage', { topic }
+    debug 'on message', { topic }
 
-  onConfig: (config) =>
-    return unless config?
-    debug 'on config', @uuid
+  onConfig: (device) =>
+    { @options } = device
+    debug 'on config', @options
 
   start: (device) =>
     { @uuid } = device

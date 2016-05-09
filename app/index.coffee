@@ -85,9 +85,9 @@ class MeshbluConnectorGenerator extends yeoman.Base
     @template "test/_meshblu-connector-spec.coffee", "test/meshblu-connector-spec.coffee", context
     @template "test/_mocha.opts", "test/mocha.opts", context
     @template "test/_test_helper.coffee", "test/test_helper.coffee", context
+    @template "src/_index.coffee", "src/index.coffee", context
     @template "_schemas.json", "schemas.json", context
     @template "_command.js", "command.js", context
-    @template "_index.coffee", "index.coffee", context
     @template "_index.js", "index.js", context
     @template "_coffeelint.json", "coffeelint.json", context
     @template "_appveyor.yml", "appveyor.yml", context
@@ -121,7 +121,7 @@ class MeshbluConnectorGenerator extends yeoman.Base
   _writeFileAsJSON: (jsonObj, relativePath) =>
     fullPath = path.join @cwd, relativePath
     try
-      return htmlWiring.writeFileFromString JSON.stringify(jsonObj, null, 2), fullPath
+      return @write fullPath, JSON.stringify(jsonObj, null, 2)
     catch error
       console.error error
 

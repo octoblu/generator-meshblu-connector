@@ -31,9 +31,9 @@ describe 'Generator', ->
       test/meshblu-connector-spec.coffee
       test/test_helper.coffee
       test/mocha.opts
+      src/index.coffee
       schemas.json
       command.js
-      index.coffee
       index.js
       coffeelint.json
       .gitignore

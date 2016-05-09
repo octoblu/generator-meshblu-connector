@@ -8,7 +8,8 @@
     "meshblu-connector-packager": "^12.0.0"
   },
   "dependencies": {
-    "meshblu-connector-runner": "^3.0.2"
+    "meshblu-config": "^4.0.0",
+    "meshblu-connector-runner": "^4.0.0"
   },
   "platformDependencies": {
     "darwin": [],
