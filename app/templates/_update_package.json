@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "meshblu-config": "^4.0.0",
-    "meshblu-connector-runner": "^4.0.0"
+    "meshblu-connector-runner": "^4.0.2"
   },
   "platformDependencies": {
     "darwin": [],

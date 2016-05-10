@@ -31,7 +31,7 @@
     "debug": "^2.2.0",
     "eventemitter2": "^1.0.0",
     "meshblu-config": "^4.0.0",
-    "meshblu-connector-runner": "^4.0.1"
+    "meshblu-connector-runner": "^4.0.2"
   },
   "meshbluConnector": {
     "githubSlug": "<%= githubSlug %>",
