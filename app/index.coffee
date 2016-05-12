@@ -10,10 +10,12 @@ class MeshbluConnectorGenerator extends yeoman.Base
   constructor: (args, options, config) ->
     super
     @option 'github-user'
+    @option 'channel'
     @currentYear = (new Date()).getFullYear()
     {@realname, @githubUrl} = options
     @skipInstall = options['skip-install']
     @githubUser  = options['github-user']
+    @channel = options['channel']
     @cwd = @destinationRoot()
     @pkg = @_readFileAsJSON 'package.json'
 
@@ -80,13 +82,6 @@ class MeshbluConnectorGenerator extends yeoman.Base
     }
 
     @_updatePkgJSON({ githubSlug }) if @pkg?
-    @template '_package.json', 'package.json', context unless @pkg?
-
-    @template "test/_meshblu-connector-spec.coffee", "test/meshblu-connector-spec.coffee", context
-    @template "test/_mocha.opts", "test/mocha.opts", context
-    @template "test/_test_helper.coffee", "test/test_helper.coffee", context
-    @template "src/_index.coffee", "src/index.coffee", context
-    @template "_schemas.json", "schemas.json", context
     @template "_command.js", "command.js", context
     @template "_index.js", "index.js", context
     @template "_coffeelint.json", "coffeelint.json", context
@@ -94,6 +89,20 @@ class MeshbluConnectorGenerator extends yeoman.Base
     @template "_travis.yml", ".travis.yml", context
     @template "_README.md", "README.md", context
     @template "_LICENSE", "LICENSE", context
+    @template "test/_meshblu-connector-spec.coffee", "test/meshblu-connector-spec.coffee", context
+    @template "test/_mocha.opts", "test/mocha.opts", context
+    @template "test/_test_helper.coffee", "test/test_helper.coffee", context
+
+    if @channel
+      @template '_channel_package.json', 'package.json', context unless @pkg?
+      @template "src/_channel_index.coffee", "src/index.coffee", context
+      @template "_optionsSchema.json", "optionsSchema.json", context
+      @template "_channel.json", "channel.json", context
+    else
+      @template '_package.json', 'package.json', context unless @pkg?
+      @template "src/_index.coffee", "src/index.coffee", context
+      @template "_schemas.json", "schemas.json", context
+
 
   _updatePkgJSON: ({ githubSlug }) =>
     templatePkg = @_readTemplateAsJSON '_update_package.json'

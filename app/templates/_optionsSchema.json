@@ -1,0 +1,19 @@
+{
+  "optionsSchema": {
+    "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string",
+          "required": true
+        },
+        "host": {
+          "type": "string",
+          "required": true
+        },
+        "port": {
+          "type": "string",
+          "required": true
+        }
+      }
+  }
+}
