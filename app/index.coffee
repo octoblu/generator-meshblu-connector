@@ -103,7 +103,6 @@ class MeshbluConnectorGenerator extends yeoman.Base
       @template "src/_index.coffee", "src/index.coffee", context
       @template "_schemas.json", "schemas.json", context
 
-
   _updatePkgJSON: ({ githubSlug }) =>
     templatePkg = @_readTemplateAsJSON '_update_package.json'
     newPackage = helpers.mergeJSON({ input: @pkg, overwriteWith: templatePkg })

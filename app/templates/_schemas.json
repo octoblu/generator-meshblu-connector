@@ -1,61 +1,68 @@
 {
   "schemas": {
-    "version": "2.0.0",
+    "version": "3.0.0-RFC2",
     "form": {
-      "message": {
-        "url": null
-      },
       "configure": {
-        "url": null
-      }
-    },
-    "configure": {
-      "url": null,
-      "type" : "object",
-      "properties" : {
-        "options": {
-          "type" : "object",
-          "properties" : {
-            "example" : {
-              "type" : "string"
-            }
+        "my-default": {
+          "angular": {
+            "url": "http://somewhere/over/the/rainbow"
+          }
+        }
+      },
+      "message": {
+        "example-01": {
+          "angular": {
+            "schema": ["*"]
           }
         }
       }
     },
-    "message": {
-      "url": null,
-      "$schema": "http://json-schema.org/draft-04/schema#",
-      "definitions": {
-        "example-message-01": {
-          "type": "object",
-          "properties": {
-            "example-opt": {
-              "type": "string"
-            },
-            "another-example-opt":{
-              "type": "string"
+    "configure": {
+      "my-default-config": {
+        "url": null,
+        "type": "object",
+        "properties": {
+          "options": {
+            "type" : "object",
+            "properties" : {
+              "example" : {
+                "type" : "string"
+              }
             }
-          },
-          "required": ["example-opt", "another-example-opt"]
+          }
         },
-        "example-message-02": {
-          "type": "object",
-          "properties": {
-            "some-opt": {
-              "type": "string"
-            },
-            "another-some-opt":{
-              "type": "string"
-            }
-          },
-          "required": ["some-opt", "another-some-opt"]
+        "formSchema": {
+          "angular": "configure.my-default.angular"
         }
+      }
+    },
+    "message": {
+      "example-message-01": {
+        "type": "object",
+        "properties": {
+          "example-opt": {
+            "type": "string"
+          },
+          "another-example-opt":{
+            "type": "string"
+          }
+        },
+        "formSchema": {
+          "angular": "message.example-01.angular"
+        },
+        "required": ["example-opt", "another-example-opt"]
       },
-      "type": "object",
-      "properties": {
-        "example-message-01": { "$ref": "#/definitions/example-message-01" },
-        "example-message-02": { "$ref": "#/definitions/example-message-02" }
+      "example-message-02": {
+        "type": "object",
+        "properties": {
+          "some-opt": {
+            "type": "string"
+          },
+          "another-some-opt":{
+            "type": "string"
+          }
+        },
+        "required": ["some-opt", "another-some-opt"]
       }
     }
   }
