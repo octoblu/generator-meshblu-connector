@@ -5,7 +5,7 @@
       "configure": {
         "my-default": {
           "angular": {
-            "url": "http://somewhere/over/the/rainbow"
+            "$ref": "http://somewhere/over/the/rainbow"
           }
         }
       },
@@ -19,7 +19,7 @@
     },
     "configure": {
       "my-default-config": {
-        "url": null,
+        "$ref": null,
         "type": "object",
         "properties": {
           "options": {

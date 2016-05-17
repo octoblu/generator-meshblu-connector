@@ -15,7 +15,11 @@ class MeshbluConnectorGenerator extends yeoman.Base
     {@realname, @githubUrl} = options
     @skipInstall = options['skip-install']
     @githubUser  = options['github-user']
-    @channel = options['channel']
+
+    if options['channel']
+      console.error '[Deprecated] channel generation is no longer supported in this generator'
+      process.exit 1
+
     @cwd = @destinationRoot()
     @pkg = @_readFileAsJSON 'package.json'
 
@@ -92,18 +96,9 @@ class MeshbluConnectorGenerator extends yeoman.Base
     @template "test/_mocha.opts", "test/mocha.opts", context
     @template "test/_test_helper.coffee", "test/test_helper.coffee", context
 
-    return @_channelSpecific context if @channel
-
-    ## Normal Specific Stuff
     @_updatePkgJSON context
     @template "src/_index.coffee", "src/index.coffee", context
     @_updateSchemasJSON context
-
-  _channelSpecific: (context) =>
-    @template '_channel_package.json', 'package.json', context
-    @template "src/_channel_index.coffee", "src/index.coffee", context
-    @template "_optionsSchema.json", "optionsSchema.json", context
-    @template "_channel.json", "channel.json", context
 
   _updatePkgJSON: (context) =>
     unless @pkg?
