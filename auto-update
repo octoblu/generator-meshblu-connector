@@ -1,8 +1,0 @@
-#!/bin/bash
-./core-auto-update
-
-echo "* Running app. [ctrl-c] to move to the next step..."
-npm start
-
-read -p "Are you feeling dangerous and want to push? Press [enter] to continue..."
-gump "upgraded connector"

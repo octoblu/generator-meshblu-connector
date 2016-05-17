@@ -2,39 +2,124 @@
 
 usage() {
   echo "./core-auto-update <connector-name>"
-  echo "   Connector name should not include 'meshblu-connector-' or 'meshblu-'"
   echo "Required Enviroment"
-  echo "   env NPM_SECRET_KEY"
   echo "   env GITHUB_RELEASE_KEY"
   echo "   env APPVEYOR_GITHUB_RELEASE_KEY"
 }
 
+run_generator() {
+  echo "* running generator"
+  yo meshblu-connector
+}
+
+encrypt_travis() {
+  local value="$1"
+  local response="$(travis encrypt "$1")"
+  echo "secure: $response"
+}
+
+update_connector() {
+  echo "* updating connector"
+  git pull
+}
+
+update_travis() {
+  echo "* updating .travis.yml"
+  local github_release_key="$1"
+  local npm_secret_key="$(get_npm_key)"
+  local secure_npm_secret="$(encrypt_travis "$npm_secret_key")"
+  replace_in_file "./.travis.yml" "npm-email" "serveradmin@octoblu.com"
+  replace_in_file "./.travis.yml" "npm-release-key" "$secure_npm_secret"
+  local secure_github_key="$(encrypt_travis "$github_release_key")"
+  replace_in_file "./.travis.yml" "github-release-key" "$secure_github_key"
+}
+
+update_appveyor() {
+  echo "* updating appveyor.yml"
+  local appveyor_github_key="$1"
+  replace_in_file "./appveyor.yml" "github-release-key" "secure: $appveyor_github_key"
+}
+
+replace_in_file() {
+  local file="$1"
+  local key="$2"
+  local value="$(echo "$3" | sed -e 's/[\/&]/\\&/g')"
+  if [ ! -f "$file" ]; then
+    echo "Missing file"
+    exit 1
+  fi
+  sed -i .bk -e "s/\[$key\]/$value/" "$file"
+  if [ -f "$file.bk" ]; then
+    rm "$file.bk"
+  fi
+}
+
+get_npm_key() {
+  cat "$HOME/.npmrc" | grep authToken | sed -e 's/.*_authToken=//'
+}
+
+panic() {
+  local message=$1
+  echo $message
+  exit 1
+}
+
 main() {
   local connector="$1"
-  local npm_secret_key="$NPM_SECRET_KEY"
   local github_release_key="$GITHUB_RELEASE_KEY"
   local appveyor_github_key="$APPVEYOR_GITHUB_RELEASE_KEY"
 
   if [ -z "$connector" ]; then
     usage
-    echo "Missing connector-name"
+    echo "Missing connector"
     exit 1
   fi
 
-  if [ -z "$npm_secret_key" ]; then
-    usage
-    echo "Missing env NPM_SECRET_KEY"
+  if [[ ! "$connector" =~ ^meshblu-connector- ]]; then
+    echo "Connector name must be prefixed with meshblu-connector-"
+    echo "Steps to correct:"
+    echo "  Rename repo in github"
+    echo "  Rename folder in ~/Projects/Octoblu/$connector"
+    echo "  Set new remote url `git remote set-url origin git@github.com:octoblu/meshblu-connector-[connector-name]`"
+    exit 1
+  fi
+
+  if [ ! -d "$HOME/Projects/Octoblu/$connector" ]; then
+    echo "Connector is not a directory"
+    exit 1
   fi
 
   if [ -z "$github_release_key" ]; then
     usage
     echo "Missing env GITHUB_RELEASE_KEY"
+    exit 1
   fi
 
   if [ -z "$appveyor_github_key" ]; then
     usage
     echo "Missing env APPVEYOR_GITHUB_RELEASE_KEY"
+    exit 1
   fi
+
+  pushd "$HOME/Projects/Octoblu/$connector" > /dev/null
+    update_connector || panic 'Failed to update connector'
+    run_generator || panic 'Failed running generator'
+    update_travis "$github_release_key" || panic 'Failed to update travis'
+    update_appveyor "$appveyor_github_key" || panic 'Failed to update appveyor'
+  popd
+
+  echo "* Done"
+  echo "** WAIT NOW DO THIS **"
+  echo "* 1. Add Tests for the module"
+  echo "* 2. Run the Module"
+  echo "* 3. Enable the project in appveyor (you have to do it in the ui)"
+  echo "* 4. Enable the project in travis (travis sync && travis enable)"
+  echo "* 5. Update the schemasUrl in package.json with a valid tag (probably the version you are about to commit)"
+  echo "* 6. Make sure it builds in appveyor (x86, x64) and publishes to github releases"
+  echo "* 7. Make sure it builds in travis (linux x86, x64; and osx x64) and publishes to npm and github releases"
+  echo "* 8. Add the connector here: https://github.com/octoblu/meshblu-connector-factory-ui/blob/master/src/assets/new-connectors.js"
+  echo "* 9. ACTUALLY TEST it with the Meshblu Connector Installer (connector-factory.octoblu.com) on all platforms"
+  echo "* Probably done now"
 }
 
 main "$@"
