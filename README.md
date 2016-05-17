@@ -35,10 +35,17 @@ Finally, initiate the generator:
 yo meshblu-connector
 ```
 
-or
+
+### Upgrading
+
+This generator works well with existing connectors but there is script that makes it easier to understand and upgrade a legacy connector.
+
+The script is located at the root of this project and is called `./update-connector`
+
+#### Usage
 
 ```bash
-yo meshblu-connector --coffee
+./update-connector <connector-name>
 ```
 
 ### Getting To Know Yeoman
