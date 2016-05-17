@@ -81,7 +81,6 @@ class MeshbluConnectorGenerator extends yeoman.Base
       constantPrefix
     }
 
-    @_updatePkgJSON({ githubSlug }) if @pkg?
     @template "_command.js", "command.js", context
     @template "_index.js", "index.js", context
     @template "_coffeelint.json", "coffeelint.json", context
@@ -93,17 +92,24 @@ class MeshbluConnectorGenerator extends yeoman.Base
     @template "test/_mocha.opts", "test/mocha.opts", context
     @template "test/_test_helper.coffee", "test/test_helper.coffee", context
 
-    if @channel
-      @template '_channel_package.json', 'package.json', context unless @pkg?
-      @template "src/_channel_index.coffee", "src/index.coffee", context
-      @template "_optionsSchema.json", "optionsSchema.json", context
-      @template "_channel.json", "channel.json", context
-    else
-      @template '_package.json', 'package.json', context unless @pkg?
-      @template "src/_index.coffee", "src/index.coffee", context
-      @template "_schemas.json", "schemas.json", context
+    return @_channelSpecific context if @channel
 
-  _updatePkgJSON: ({ githubSlug }) =>
+    ## Normal Specific Stuff
+    @_updatePkgJSON context
+    @template "src/_index.coffee", "src/index.coffee", context
+    @_updateSchemasJSON context
+
+  _channelSpecific: (context) =>
+    @template '_channel_package.json', 'package.json', context
+    @template "src/_channel_index.coffee", "src/index.coffee", context
+    @template "_optionsSchema.json", "optionsSchema.json", context
+    @template "_channel.json", "channel.json", context
+
+  _updatePkgJSON: (context) =>
+    unless @pkg?
+      @template '_package.json', 'package.json', context
+      return
+    { githubSlug } = context
     templatePkg = @_readTemplateAsJSON '_update_package.json'
     newPackage = helpers.mergeJSON({ input: @pkg, overwriteWith: templatePkg })
     newPackage.name = @fullAppName
@@ -111,6 +117,38 @@ class MeshbluConnectorGenerator extends yeoman.Base
     newPackage.meshbluConnector.githubSlug ?= githubSlug
     newPackage.meshbluConnector.schemasUrl ?= "https://raw.githubusercontent.com/#{githubSlug}/v#{@pkg.version}/schemas.json"
     return @_writeFileAsJSON(newPackage, 'package.json')
+
+  _updateSchemasJSON: (context) =>
+    indexFile = @_readFile 'index.js'
+    unless indexFile?
+      @template "_schemas.json", "schemas.json", context
+      return
+
+    { messageSchema, optionsSchema } = indexFile
+    unless messageSchema? && optionsSchema?
+      @template "_schemas.json", "schemas.json", context
+      return
+
+    messageSchema.title = 'Default Message'
+    newSchema =
+      version: '1.0.0',
+      configure:
+        "default-config":
+          title: 'Default Config'
+          type: 'object',
+          properties:
+            options: optionsSchema
+      message:
+        "default-message": messageSchema
+
+    @_writeFileAsJSON(newSchema, 'schemas.json')
+
+  _readFile: (relativePath) =>
+    fullPath = path.join @cwd, relativePath
+    try
+      return require fullPath
+    catch
+      return null
 
   _readTemplateAsJSON: (relativePath) =>
     fullPath = path.join __dirname, 'templates', relativePath
