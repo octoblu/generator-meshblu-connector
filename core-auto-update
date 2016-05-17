@@ -76,11 +76,11 @@ main() {
   fi
 
   if [[ ! "$connector" =~ ^meshblu-connector- ]]; then
-    echo "Connector name must be prefixed with meshblu-connector-"
-    echo "Steps to correct:"
-    echo "  Rename repo in github"
-    echo "  Rename folder in ~/Projects/Octoblu/$connector"
-    echo "  Set new remote url `git remote set-url origin git@github.com:octoblu/meshblu-connector-[connector-name]`"
+    echo 'Connector name must be prefixed with meshblu-connector-'
+    echo 'Steps to correct:'
+    echo '  Rename repo in github'
+    echo '  Rename folder in ~/Projects/Octoblu/$connector'
+    echo ' Set new remote url `git remote set-url origin git@github.com:octoblu/meshblu-connector-[connector-name]`'
     exit 1
   fi
 
@@ -91,13 +91,13 @@ main() {
 
   if [ -z "$github_release_key" ]; then
     usage
-    echo "Missing env GITHUB_RELEASE_KEY"
+    echo 'Missing env GITHUB_RELEASE_KEY'
     exit 1
   fi
 
   if [ -z "$appveyor_github_key" ]; then
     usage
-    echo "Missing env APPVEYOR_GITHUB_RELEASE_KEY"
+    echo 'Missing env APPVEYOR_GITHUB_RELEASE_KEY'
     exit 1
   fi
 
@@ -108,18 +108,18 @@ main() {
     update_appveyor "$appveyor_github_key" || panic 'Failed to update appveyor'
   popd
 
-  echo "* Done"
-  echo "** WAIT NOW DO THIS **"
-  echo "* 1. Add Tests for the module"
-  echo "* 2. Run the Module"
-  echo "* 3. Enable the project in appveyor (you have to do it in the ui)"
-  echo "* 4. Enable the project in travis (travis sync && travis enable)"
-  echo "* 5. Update the schemasUrl in package.json with a valid tag (probably the version you are about to commit)"
-  echo "* 6. Make sure it builds in appveyor (x86, x64) and publishes to github releases"
-  echo "* 7. Make sure it builds in travis (linux x86, x64; and osx x64) and publishes to npm and github releases"
-  echo "* 8. Add the connector here: https://github.com/octoblu/meshblu-connector-factory-ui/blob/master/src/assets/new-connectors.js"
-  echo "* 9. ACTUALLY TEST it with the Meshblu Connector Installer (connector-factory.octoblu.com) on all platforms"
-  echo "* Probably done now"
+  echo '* Done'
+  echo '** WAIT NOW DO THIS **'
+  echo '* 1. Add Tests for the module'
+  echo '* 2. Run the Module'
+  echo '* 3. Enable the project in appveyor (you have to do it in the ui)'
+  echo '* 4. Enable the project in travis (travis sync && travis enable)'
+  echo '* 5. Update the schemasUrl in package.json with a valid tag (probably the version you are about to commit)'
+  echo '* 6. Make sure it builds in appveyor (x86, x64) and publishes to github releases'
+  echo '* 7. Make sure it builds in travis (linux x86, x64; and osx x64) and publishes to npm and github releases'
+  echo '* 8. Add the connector here: https://github.com/octoblu/meshblu-connector-factory-ui/blob/master/src/assets/new-connectors.js'
+  echo '* 9. ACTUALLY TEST it with the Meshblu Connector Installer (connector-factory.octoblu.com) on all platforms'
+  echo '* Probably done now'
 }
 
 main "$@"
