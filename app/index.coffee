@@ -85,6 +85,8 @@ class MeshbluConnectorGenerator extends yeoman.Base
       constantPrefix
     }
 
+    @_updatePkgJSON context
+    @_updateSchemasJSON context
     @template "_command.js", "command.js", context
     @template "_index.js", "index.js", context
     @template "_coffeelint.json", "coffeelint.json", context
@@ -95,10 +97,7 @@ class MeshbluConnectorGenerator extends yeoman.Base
     @template "test/_meshblu-connector-spec.coffee", "test/meshblu-connector-spec.coffee", context
     @template "test/_mocha.opts", "test/mocha.opts", context
     @template "test/_test_helper.coffee", "test/test_helper.coffee", context
-
-    @_updatePkgJSON context
     @template "src/_index.coffee", "src/index.coffee", context
-    @_updateSchemasJSON context
 
   _updatePkgJSON: (context) =>
     unless @pkg?
