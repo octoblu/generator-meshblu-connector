@@ -1,6 +1,6 @@
 {
   "name": "generator-meshblu-connector",
-  "version": "9.0.1",
+  "version": "9.1.0",
   "description": "A generator for Yeoman",
   "keywords": [
     "yeoman-generator"
@@ -15,6 +15,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/octoblu/generator-meshblu-connector.git"
+  },
+  "bin": {
+    "update-meshblu-connector": "./update-meshblu-connector"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha test/*spec.coffee"

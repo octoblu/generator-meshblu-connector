@@ -45,7 +45,7 @@ The script is located at the root of this project and is called `./update-connec
 #### Usage
 
 ```bash
-./update-connector <connector-name>
+update-meshblu-connector <connector-name> [/path/to/project/folder]
 ```
 
 ### Getting To Know Yeoman

@@ -1,10 +1,15 @@
 #!/bin/bash
 
 usage() {
-  echo "./update-connector <connector-name>"
-  echo "Required Enviroment"
-  echo "   env GITHUB_RELEASE_KEY"
-  echo "   env APPVEYOR_GITHUB_RELEASE_KEY"
+  echo "./update-connector <connector-name> [/path/to/project/folder]"
+  echo " "
+  echo "Defaults:"
+  echo "   If no path is specified, it will default to $HOME/Projects/Octoblu"
+  echo " "
+  echo "Required Enviroment:"
+  echo "   env GITHUB_RELEASE_KEY (Unencrypted Github API Token)"
+  echo "   env APPVEYOR_GITHUB_RELEASE_KEY (The encrypted token from AppVeyor without 'secure: ')"
+  echo " "
 }
 
 run_generator() {
@@ -76,6 +81,7 @@ panic() {
 
 main() {
   local connector="$1"
+  local path_to_connector="$2"
   local github_release_key="$GITHUB_RELEASE_KEY"
   local appveyor_github_key="$APPVEYOR_GITHUB_RELEASE_KEY"
 
@@ -85,17 +91,24 @@ main() {
     exit 1
   fi
 
+  if [ -z "$path_to_connector" ]; then
+    path_to_connector="$HOME/Projects/Octoblu"
+  fi
+
   if [[ ! "$connector" =~ ^meshblu-connector- ]]; then
     echo 'Connector name must be prefixed with meshblu-connector-'
     echo 'Steps to correct:'
+    echo 'Option 1:'
+    echo '  Create a new Connector Repo'
+    echo 'Option 2:'
     echo '  Rename repo in github'
-    echo '  Rename folder in ~/Projects/Octoblu/$connector'
-    echo ' Set new remote url `git remote set-url origin git@github.com:octoblu/meshblu-connector-[connector-name]`'
+    echo "  Rename folder in $path_to_connector/meshblu-connector-[connector-name]"
+    echo '  Set new remote url "git remote set-url origin git@github.com:octoblu/meshblu-connector-[connector-name]"'
     exit 1
   fi
 
-  if [ ! -d "$HOME/Projects/Octoblu/$connector" ]; then
-    echo "Connector is not a directory"
+  if [ ! -d "$path_to_connector/$connector" ]; then
+    echo "$path_to_connector/$connector is not a directory"
     exit 1
   fi
 
@@ -116,16 +129,24 @@ main() {
     exit 1
   fi
 
-  pushd "$HOME/Projects/Octoblu/$connector"
+  if [[ "$appveyor_github_key" =~ ^secure ]]; then
+    usage
+    echo 'APPVEYOR_GITHUB_RELEASE_KEY must not contain "secure: "'
+    exit 1
+  fi
+
+  pushd "$path_to_connector/$connector" > /dev/null
     update_connector || panic 'Failed to update connector'
     run_generator || panic 'Failed running generator'
     enable_travis || panic 'Failed travis'
     update_travis "$github_release_key" || panic 'Failed to update travis'
     update_appveyor "$appveyor_github_key" || panic 'Failed to update appveyor'
     npm_check
-  popd
+  popd > /dev/null
 
   echo '* Done'
+  echo ' '
+  echo ' '
   echo '** WAIT NOW DO THIS **'
   echo '* 1. Add Tests for the module'
   echo '* 2. Run the Module'
