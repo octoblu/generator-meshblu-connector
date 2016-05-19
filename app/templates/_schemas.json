@@ -31,9 +31,10 @@
             }
           }
         },
-        "formSchema": {
+        "x-form-schema": {
           "angular": "configure.my-default.angular"
-        }
+        },
+        "x-group-name": "Configure Example Group"
       }
     },
     "message": {
@@ -47,7 +48,7 @@
             "type": "string"
           }
         },
-        "formSchema": {
+        "x-form-schema": {
           "angular": "message.example-01.angular"
         },
         "required": ["example-opt", "another-example-opt"]
