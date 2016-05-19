@@ -125,15 +125,16 @@ class MeshbluConnectorGenerator extends yeoman.Base
 
     messageSchema.title = 'Default Message'
     newSchema =
-      version: '1.0.0',
-      configure:
-        "default-config":
-          title: 'Default Config'
-          type: 'object',
-          properties:
-            options: optionsSchema
-      message:
-        "default-message": messageSchema
+      schemas:
+        version: '1.0.0',
+        configure:
+          "default-config":
+            title: 'Default Config'
+            type: 'object',
+            properties:
+              options: optionsSchema
+        message:
+          "default-message": messageSchema
 
     @_writeFileAsJSON(newSchema, 'schemas.json')
 
