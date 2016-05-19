@@ -2,13 +2,6 @@
   "schemas": {
     "version": "1.0.0",
     "form": {
-      "configure": {
-        "my-default": {
-          "angular": {
-            "$ref": "http://somewhere/over/the/rainbow"
-          }
-        }
-      },
       "message": {
         "example-01": {
           "angular": {
@@ -19,7 +12,6 @@
     },
     "configure": {
       "my-default-config": {
-        "$ref": null,
         "type": "object",
         "properties": {
           "options": {
@@ -30,11 +22,7 @@
               }
             }
           }
-        },
-        "x-form-schema": {
-          "angular": "configure.my-default.angular"
-        },
-        "x-group-name": "Configure Example Group"
+        }
       }
     },
     "message": {
@@ -51,6 +39,7 @@
         "x-form-schema": {
           "angular": "message.example-01.angular"
         },
+        "x-group-name": "Message Example Group",
         "required": ["example-opt", "another-example-opt"]
       },
       "example-message-02": {
