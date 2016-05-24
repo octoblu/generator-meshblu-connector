@@ -36,16 +36,13 @@ yo meshblu-connector
 ```
 
 
-### Upgrading
-
-This generator works well with existing connectors but there is script that makes it easier to understand and upgrade a legacy connector.
-
-The script is located at the root of this project and is called `./update-connector`
+### Easier Option
 
 #### Usage
 
 ```bash
-update-meshblu-connector <connector-name> [/path/to/project/folder]
+cd /path/to/connector
+env GITHUB_RELEASE_KEY='--insert-key-here--' APPVEYOR_GITHUB_RELEASE_KEY='--insert-key-here--' update-meshblu-connector
 ```
 
 ### Getting To Know Yeoman
