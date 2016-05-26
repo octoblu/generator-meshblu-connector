@@ -4,9 +4,6 @@
     "start": "meshblu-connector-runner",
     "package": "meshblu-connector-packager"
   },
-  "devDependencies": {
-    "meshblu-connector-packager": "^12.0.0"
-  },
   "dependencies": {
     "meshblu-config": "^4.0.0",
     "meshblu-connector-runner": "^6.0.0"

@@ -54,9 +54,6 @@ describe 'Generator', ->
     it 'should have meshblu-connector-runner in the dependencies', ->
       expect(@pkg.dependencies['meshblu-connector-runner']).to.not.be.empty
 
-    it 'should have meshblu-connector-packager in the devDependencies', ->
-      expect(@pkg.devDependencies['meshblu-connector-packager']).to.not.be.empty
-
     it 'should have main pointing to index.js', ->
       expect(@pkg.main).to.equal 'index.js'
 

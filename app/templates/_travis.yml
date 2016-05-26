@@ -36,7 +36,11 @@ install:
 script:
 - npm test
 before_deploy:
-- npm run package
+- npm install --build-from-source --production
+- npm install meshblu-connector-packager
+- npm dedupe
+- npm install -g flatten-packages
+- flatten-packages
 deploy:
 - provider: releases
   api_key:

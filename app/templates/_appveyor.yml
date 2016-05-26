@@ -15,7 +15,11 @@ install:
   - SET GYP_MSVS_VERSION=2013
   - if "%PLATFORM%" == "x64" set PATH=C:\Python27-x64;%PATH%
   - if "%PLATFORM%" == "x86" SET PATH=C:\python27;%PATH%
-  - npm install
+  - npm install --build-from-source --production
+  - npm install meshblu-connector-packager
+  - npm dedupe
+  - npm install -g flatten-packages
+  - flatten-packages
   - ps: >-
       if($env:platform -eq "x86") {
         $env:PACKAGER_ARCH="386"
