@@ -41,6 +41,7 @@ before_deploy:
 - npm dedupe
 - npm install -g flatten-packages
 - flatten-packages
+- npm run package
 deploy:
 - provider: releases
   api_key:
