@@ -95,6 +95,7 @@ class MeshbluConnectorGenerator extends yeoman.Base
     @template "_README.md", "README.md", context
     @template "_LICENSE", "LICENSE", context
     @template "test/_meshblu-connector-spec.coffee", "test/meshblu-connector-spec.coffee", context
+    @template "test/_schemas-spec.coffee", "test/schemas-spec.coffee", context
     @template "test/_mocha.opts", "test/mocha.opts", context
     @template "test/_test_helper.coffee", "test/test_helper.coffee", context
     @template "src/_index.coffee", "src/index.coffee", context
@@ -129,10 +130,11 @@ class MeshbluConnectorGenerator extends yeoman.Base
         version: '1.0.0',
         configure:
           "default-config":
-            title: 'Default Config'
+            title: 'Default Configuration'
             type: 'object',
             properties:
               options: optionsSchema
+            required: ["options"]
         message:
           "default-message": messageSchema
 

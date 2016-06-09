@@ -8,10 +8,6 @@ describe '<%= classPrefix %>', ->
     it 'should be a method', ->
       expect(@sut.start).to.be.a 'function'
 
-    describe 'when called with nothing', ->
-      it 'should throw an error', ->
-        expect(@sut.start).to.throw(Error)
-
     describe 'when called with a device', ->
       it 'should not throw an error', ->
         expect(=> @sut.start({ uuid: 'hello' })).to.not.throw(Error)

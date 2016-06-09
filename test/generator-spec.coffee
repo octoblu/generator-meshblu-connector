@@ -28,6 +28,7 @@ describe 'Generator', ->
 
   it 'creates expected files', ->
     assert.file '''
+      test/schemas-spec.coffee
       test/meshblu-connector-spec.coffee
       test/test_helper.coffee
       test/mocha.opts

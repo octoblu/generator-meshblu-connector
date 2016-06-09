@@ -2,6 +2,7 @@
   "main": "index.js",
   "scripts": {
     "start": "meshblu-connector-runner",
+    "test": "mocha",
     "package": "meshblu-connector-packager"
   },
   "dependencies": {
@@ -13,7 +14,7 @@
     "win32": [],
     "win64": [],
     "linux": [],
-    "android": [],
-    "ios": []
+    "android": null,
+    "ios": null
   }
 }

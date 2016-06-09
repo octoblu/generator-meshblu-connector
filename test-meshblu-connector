@@ -1,0 +1,62 @@
+#!/bin/bash
+
+generate_config() {
+  meshblu-util register --legacy -t 'device:test' > meshblu.json || exit 1
+  local name="$(get_name)"
+  add_value_to_key "name" "Test $name" || exit 1
+}
+
+get_uuid() {
+  cat meshblu.json | jq '.uuid' --raw-output
+}
+
+get_name() {
+  cat package.json | jq '.name' --raw-output
+}
+
+update_device_schemas() {
+  meshblu-util update -f schemas.json
+}
+
+add_owner_to_key() {
+  local key="$1"
+  local owner="$2"
+  meshblu-util update -d "{\"$key\": [\"$owner\"]}"
+}
+
+add_value_to_key() {
+  local key="$1"
+  local owner="$2"
+  meshblu-util update -d "{\"$key\": \"$owner\"}"
+}
+
+claim_device() {
+  local owner="$1"
+  add_owner_to_key "discoverWhitelist" "$owner" || exit 1
+  add_owner_to_key "configureWhitelist" "$owner" || exit 1
+  add_owner_to_key "sendWhitelist" "$owner" || exit 1
+  add_owner_to_key "receiveWhitelist" "$owner" || exit 1
+  add_owner_to_key "owner" "$owner" || exit 1
+}
+
+main() {
+  if [ ! -f "./package.json" ]; then
+    echo "Are you running this inside a connector?"
+    exit 1
+  fi
+
+  local owner="$1"
+
+  if [ -z "$owner" ]; then
+    echo "Missing owner"
+    exit 1
+  fi
+
+  generate_config || exit 1
+  update_device_schemas || exit 1
+  claim_device "$owner" || exit 1
+  local uuid="$(get_uuid)"
+  open "https://app.octoblu.com/device/$uuid"
+}
+
+main "$@"
