@@ -12,8 +12,8 @@ class <%= classPrefix %> extends EventEmitter
     callback()
 
   onMessage: (message={}) =>
-    { payload } = message
-    debug 'on message', payload
+    { metadata, data } = message
+    debug 'on message', message
 
   onConfig: (device={}) =>
     { @options } = device
