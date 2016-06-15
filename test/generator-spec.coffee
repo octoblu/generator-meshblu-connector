@@ -1,8 +1,9 @@
+_       = require 'lodash'
 path    = require 'path'
 helpers = require 'yeoman-test'
 assert  = require 'yeoman-assert'
 Mocha   = require 'mocha'
-fs      = require 'fs'
+glob    = require 'glob'
 npm     = require 'npm'
 
 GENERATOR_NAME = 'yoyo'
@@ -28,16 +29,22 @@ describe 'Generator', ->
 
   it 'creates expected files', ->
     assert.file '''
-      test/schemas-spec.coffee
-      test/meshblu-connector-spec.coffee
+      configs/default.cson
+      jobs/do-something/action.coffee
+      jobs/do-something/form.cson
+      jobs/do-something/index.coffee
+      jobs/do-something/job.coffee
+      jobs/do-something/message.cson
+      jobs/do-something/response.cson
+      test/connector-spec.coffee
       test/test_helper.coffee
       test/mocha.opts
       src/index.coffee
-      schemas.json
       command.js
       index.js
       coffeelint.json
       .gitignore
+      .npmignore
       .travis.yml
       appveyor.yml
       LICENSE
@@ -68,18 +75,18 @@ describe 'Generator', ->
     before (done) ->
       @timeout 20000
       npm.load production: false, progress: false, =>
-        minimumModules = ['debug', 'coffee-script', 'chai', 'sinon', 'sinon-chai']
+        minimumModules = ['debug', 'coffee-script', 'chai', 'sinon', 'sinon-chai', 'fs-cson']
         npm.commands.install @tmpDir, minimumModules, done
 
-    beforeEach ->
-      testDir = path.join @tmpDir, 'test'
+    beforeEach (done) ->
+      testFiles = path.join @tmpDir, 'test', "**/*-spec.*"
       @mocha = new Mocha()
 
-      fs.readdirSync(testDir)
-        .filter (file) =>
-          return file.substr(-7) == '.coffee'
-        .forEach (file) =>
-          @mocha.addFile path.join testDir, file
+      glob testFiles, (error, files) =>
+        return done error if error?
+        _.each files, (file) =>
+          @mocha.addFile file
+        done()
 
     it 'should pass the tests', (done) ->
       @mocha.run (failures) =>

@@ -17,6 +17,7 @@ get_name() {
 
 update_device_schemas() {
   echo "* update device schemas"
+  npm run generate:schema
   meshblu-util update -f schemas.json
 }
 

@@ -64,6 +64,7 @@ class MeshbluConnectorGenerator extends yeoman.Base
 
   configuring: =>
     @copy '_gitignore', '.gitignore'
+    @copy '_npmignore', '.npmignore'
 
   writing: =>
     filePrefix     = _.kebabCase @noMeshbluConnector
@@ -86,7 +87,6 @@ class MeshbluConnectorGenerator extends yeoman.Base
     }
 
     @_updatePkgJSON context
-    @_updateSchemasJSON context
     @template "_command.js", "command.js", context
     @template "_index.js", "index.js", context
     @template "_coffeelint.json", "coffeelint.json", context
@@ -94,11 +94,18 @@ class MeshbluConnectorGenerator extends yeoman.Base
     @template "_travis.yml", ".travis.yml", context
     @template "_README.md", "README.md", context
     @template "_LICENSE", "LICENSE", context
-    @template "test/_meshblu-connector-spec.coffee", "test/meshblu-connector-spec.coffee", context
-    @template "test/_schemas-spec.coffee", "test/schemas-spec.coffee", context
+    @template "test/_connector-spec.coffee", "test/connector-spec.coffee", context
     @template "test/_mocha.opts", "test/mocha.opts", context
     @template "test/_test_helper.coffee", "test/test_helper.coffee", context
+    @template "test/jobs/_do-something-spec.coffee", "test/jobs/do-something-spec.coffee", context
     @template "src/_index.coffee", "src/index.coffee", context
+    @copy "configs/default.cson", "configs/default.cson"
+    @copy "jobs/do-something/action.coffee", "jobs/do-something/action.coffee"
+    @copy "jobs/do-something/form.cson", "jobs/do-something/form.cson"
+    @copy "jobs/do-something/index.coffee", "jobs/do-something/index.coffee"
+    @copy "jobs/do-something/job.coffee", "jobs/do-something/job.coffee"
+    @copy "jobs/do-something/message.cson", "jobs/do-something/message.cson"
+    @copy "jobs/do-something/response.cson", "jobs/do-something/response.cson"
 
   _updatePkgJSON: (context) =>
     unless @pkg?
@@ -112,33 +119,6 @@ class MeshbluConnectorGenerator extends yeoman.Base
     newPackage.meshbluConnector.githubSlug ?= githubSlug
     newPackage.meshbluConnector.schemasUrl ?= "https://raw.githubusercontent.com/#{githubSlug}/v#{@pkg.version}/schemas.json"
     return @_writeFileAsJSON(newPackage, 'package.json')
-
-  _updateSchemasJSON: (context) =>
-    indexFile = @_readFile 'index.js'
-    unless indexFile?
-      @template "_schemas.json", "schemas.json", context
-      return
-
-    { messageSchema, optionsSchema } = indexFile
-    unless messageSchema? && optionsSchema?
-      @template "_schemas.json", "schemas.json", context
-      return
-
-    messageSchema.title = 'Default Message'
-    newSchema =
-      schemas:
-        version: '1.0.0',
-        configure:
-          "default-config":
-            title: 'Default Configuration'
-            type: 'object',
-            properties:
-              options: optionsSchema
-            required: ["options"]
-        message:
-          "default-message": messageSchema
-
-    @_writeFileAsJSON(newSchema, 'schemas.json')
 
   _readFile: (relativePath) =>
     fullPath = path.join @cwd, relativePath

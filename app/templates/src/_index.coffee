@@ -11,16 +11,13 @@ class <%= classPrefix %> extends EventEmitter
     debug 'on close'
     callback()
 
-  onMessage: (message={}) =>
-    { metadata, data } = message
-    debug 'on message', message
-
   onConfig: (device={}) =>
     { @options } = device
     debug 'on config', @options
 
-  start: (device) =>
+  start: (device, callback) =>
     debug 'started'
     @onConfig device
+    callback()
 
 module.exports = <%= classPrefix %>

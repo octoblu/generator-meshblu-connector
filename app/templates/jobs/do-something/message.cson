@@ -1,0 +1,11 @@
+title: 'DoSomething'
+type: 'object'
+properties:
+  data:
+    type: 'object'
+    properties:
+      example:
+        type: 'string'
+    required: [
+      'example'
+    ]

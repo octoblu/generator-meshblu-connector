@@ -15,21 +15,25 @@ install:
   - SET GYP_MSVS_VERSION=2013
   - if "%PLATFORM%" == "x64" set PATH=C:\Python27-x64;%PATH%
   - if "%PLATFORM%" == "x86" SET PATH=C:\python27;%PATH%
-  - npm install --build-from-source --production
-  - npm install meshblu-connector-packager
-  - npm dedupe
-  - npm install -g flatten-packages
-  - flatten-packages
+  - npm install --build-from-source
+build: off
+test_script:
+  - npm test
+before_deploy:
   - ps: >-
       if($env:platform -eq "x86") {
         $env:PACKAGER_ARCH="386"
       } else {
         $env:PACKAGER_ARCH="amd64"
       }
-  - npm run package
+  - npm prune --production
+  - npm install meshblu-connector-packager
+  - npm dedupe
+  - npm install -g flatten-packages
+  - flatten-packages
+  - npm run generate:package
+  - npm run generate:schema
   - ps: $root = Resolve-Path deploy; [IO.Directory]::GetFiles($root.Path, '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName Connector }
-build: off
-test: off
 deploy:
 - provider: GitHub
   description: 'Meshblu Connector Bundle'

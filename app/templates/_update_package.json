@@ -3,11 +3,13 @@
   "scripts": {
     "start": "meshblu-connector-runner",
     "test": "mocha",
-    "package": "meshblu-connector-packager"
+    "generate:package": "meshblu-connector-packager",
+    "generate:schema": "meshblu-connector-schema-generator > schemas.json"
   },
   "dependencies": {
+    "fs-cson": "^0.3.2",
     "meshblu-config": "^4.0.0",
-    "meshblu-connector-runner": "^6.0.0"
+    "meshblu-connector-runner": "^7.0.0"
   },
   "platformDependencies": {
     "darwin": [],
