@@ -1,6 +1,6 @@
 {
   "name": "generator-meshblu-connector",
-  "version": "13.0.0",
+  "version": "13.0.1",
   "description": "A generator for Yeoman",
   "keywords": [
     "yeoman-generator"
@@ -28,6 +28,7 @@
     "fs-cson": "^0.3.2",
     "github": "^0.2.4",
     "html-wiring": "^1.2.0",
+    "lodash": "^4.13.1",
     "yeoman-generator": "^0.22.5"
   },
   "devDependencies": {
