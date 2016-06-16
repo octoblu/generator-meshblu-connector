@@ -1,7 +1,7 @@
 {EventEmitter}  = require 'events'
 debug           = require('debug')('<%= appname %>:index')
 
-class <%= classPrefix %> extends EventEmitter
+class Connector extends EventEmitter
   constructor: ->
 
   isOnline: (callback) =>
@@ -20,4 +20,4 @@ class <%= classPrefix %> extends EventEmitter
     @onConfig device
     callback()
 
-module.exports = <%= classPrefix %>
+module.exports = Connector
