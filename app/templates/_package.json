@@ -2,8 +2,8 @@
   "name": "<%= appname %>",
   "version": "1.0.0",
   "description": "Meshblu Connector <% classPrefix %>",
-  "homepage": "<%= githubUrl %>/<%= filePrefix %>",
-  "bugs": "<%= githubUrl %>/<%= filePrefix %>/issues",
+  "homepage": "<%= githubUrl %>/<%= appname %>",
+  "bugs": "<%= githubUrl %>/<%= appname %>/issues",
   "author": {
     "name": "<%= realname %>",
     "url": "<%= githubUrl %>"
@@ -11,7 +11,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "<%= githubUrl %>/<%= filePrefix %>.git"
+    "url": "<%= githubUrl %>/<%= appname %>.git"
   },
   "scripts": {
     "start": "meshblu-connector-runner",
