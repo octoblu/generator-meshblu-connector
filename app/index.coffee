@@ -101,6 +101,7 @@ class MeshbluConnectorGenerator extends yeoman.Base
     @template "src/_index.coffee", "src/index.coffee", context
     @copy "configs/default/config.cson", "configs/default/config.cson"
     @copy "configs/default/form.cson", "configs/default/form.cson"
+    @copy "configs/default/index.coffee", "configs/default/index.coffee"
     @copy "jobs/do-something/action.coffee", "jobs/do-something/action.coffee"
     @copy "jobs/do-something/form.cson", "jobs/do-something/form.cson"
     @copy "jobs/do-something/index.coffee", "jobs/do-something/index.coffee"

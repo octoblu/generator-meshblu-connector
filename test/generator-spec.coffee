@@ -31,6 +31,7 @@ describe 'Generator', ->
     assert.file '''
       configs/default/config.cson
       configs/default/form.cson
+      configs/default/index.coffee
       jobs/do-something/action.coffee
       jobs/do-something/form.cson
       jobs/do-something/index.coffee
