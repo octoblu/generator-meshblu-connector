@@ -29,7 +29,8 @@ describe 'Generator', ->
 
   it 'creates expected files', ->
     assert.file '''
-      configs/default.cson
+      configs/default/config.cson
+      configs/default/form.cson
       jobs/do-something/action.coffee
       jobs/do-something/form.cson
       jobs/do-something/index.coffee
