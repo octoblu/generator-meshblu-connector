@@ -1,56 +1,55 @@
-# generator-meshblu-connector [![Build Status](https://secure.travis-ci.org/iamruinous/generator-meshblu-connector.png?branch=master)](https://travis-ci.org/iamruinous/generator-meshblu-connector)
+# generator-meshblu-connector
+
+[![Dependency status](http://img.shields.io/david/octoblu/generate-meshblu-connector.svg?style=flat)](https://david-dm.org/octoblu/generate-meshblu-connector)
+[![devDependency Status](http://img.shields.io/david/dev/octoblu/generate-meshblu-connector.svg?style=flat)](https://david-dm.org/octoblu/generate-meshblu-connector#info=devDependencies)
+[![Build Status](http://img.shields.io/travis/octoblu/generate-meshblu-connector.svg?style=flat&branch=master)](https://travis-ci.org/octoblu/generate-meshblu-connector)
+[![Slack Status](http://community-slack.octoblu.com/badge.svg)](http://community-slack.octoblu.com)
 
 > [Yeoman](http://yeoman.io) generator
 
-
 ## Getting Started
 
-### What is Yeoman?
-
-Trick question. It's not a thing. It's this guy:
-
-![](http://i.imgur.com/JHaAlBJ.png)
-
-Basically, he wears a top hat, lives in your computer, and waits for you to tell him what kind of application you wish to create.
-
-Not every new computer comes with a Yeoman pre-installed. He lives in the [npm](https://npmjs.org) package repository. You only have to ask for him once, then he packs up and moves into your hard drive. *Make sure you clean up, he likes new and shiny things.*
+### Install Yeoman
 
 ```bash
 npm install -g yo
 ```
 
-### Yeoman Generators
-
-Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.
-
-To install generator-meshblu-connector from npm, run:
+### Install the Generator
 
 ```bash
 npm install -g generator-meshblu-connector
 ```
 
-Finally, initiate the generator:
+Finally, initiate the generator. However there is more automated [script](#update-meshblu-connector) for updating connectors.
 
 ```bash
 yo meshblu-connector
 ```
 
+### Automated Scripts
 
-### Easier Option
+#### update-meshblu-connector
 
-#### Usage
+This script automates travis-ci, appveyor, running the generator, and updating the dependencies.
+
+**Usage:**
 
 ```bash
 cd /path/to/connector
 env GITHUB_RELEASE_KEY='--insert-key-here--' APPVEYOR_GITHUB_RELEASE_KEY='--insert-key-here--' update-meshblu-connector
 ```
 
-### Getting To Know Yeoman
+#### test-meshblu-connector
 
-Yeoman has a heart of gold. He's a person with feelings and opinions, but he's very easy to work with. If you think he's too opinionated, he can be easily convinced.
+This script makes it easy to test a connector in production. It creates a Meshblu device, writes it to the meshblu.json, claims the device, updates the schema, and opens it in octoblu.
 
-If you'd like to get to know Yeoman better and meet some of his friends, [Grunt](http://gruntjs.com) and [Bower](http://bower.io), check out the complete [Getting Started Guide](https://github.com/yeoman/yeoman/wiki/Getting-Started).
+**Usage:**
 
+```bash
+cd /path/to/connector
+test-meshblu-connector "--insert-octoblu-user-uuid---"
+```
 
 ## License
 
