@@ -32,11 +32,11 @@
     "debug": "^2.2.0",
     "fs-cson": "^0.3.2",
     "meshblu-config": "^4.0.0",
-    "meshblu-connector-runner": "^7.0.0"
+    "meshblu-connector-runner": "^8.0.0",
+    "meshblu-connector-schema-generator": "^1.0.1"
   },
   "meshbluConnector": {
-    "githubSlug": "<%= githubSlug %>",
-    "schemasUrl": "https://file-downloader.octoblu.com/github-release/<%= githubSlug %>/v1.0.0/schemas.json"
+    "githubSlug": "<%= githubSlug %>"
   },
   "platformDependencies": {
     "darwin": [],

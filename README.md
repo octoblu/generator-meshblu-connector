@@ -5,7 +5,11 @@
 [![Build Status](http://img.shields.io/travis/octoblu/generator-meshblu-connector.svg?style=flat&branch=master)](https://travis-ci.org/octoblu/generator-meshblu-connector)
 [![Slack Status](http://community-slack.octoblu.com/badge.svg)](http://community-slack.octoblu.com)
 
+[![NPM](https://nodei.co/npm/generator-meshblu-connector.svg?style=flat)](https://npmjs.org/package/generator-meshblu-connector)
+
 > [Yeoman](http://yeoman.io) generator
+
+A component of [Meshblu Connectors](https://meshblu-connectors.readme.io). Click [here](https://meshblu-connectors.readme.io/docs/connector-generator) to view the component documentation.
 
 ## Getting Started
 

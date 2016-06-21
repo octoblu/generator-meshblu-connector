@@ -117,7 +117,6 @@ class MeshbluConnectorGenerator extends yeoman.Base
     newPackage.name = @fullAppName
     newPackage.meshbluConnector ?= {}
     newPackage.meshbluConnector.githubSlug ?= githubSlug
-    newPackage.meshbluConnector.schemasUrl ?= "https://raw.githubusercontent.com/#{githubSlug}/v#{@pkg.version}/schemas.json"
     return @_writeFileAsJSON(newPackage, 'package.json')
 
   _readFile: (relativePath) =>
