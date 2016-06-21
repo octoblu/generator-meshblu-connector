@@ -1,8 +1,8 @@
 # generator-meshblu-connector
 
-[![Dependency status](http://img.shields.io/david/octoblu/generate-meshblu-connector.svg?style=flat)](https://david-dm.org/octoblu/generate-meshblu-connector)
-[![devDependency Status](http://img.shields.io/david/dev/octoblu/generate-meshblu-connector.svg?style=flat)](https://david-dm.org/octoblu/generate-meshblu-connector#info=devDependencies)
-[![Build Status](http://img.shields.io/travis/octoblu/generate-meshblu-connector.svg?style=flat&branch=master)](https://travis-ci.org/octoblu/generate-meshblu-connector)
+[![Dependency status](http://img.shields.io/david/octoblu/generator-meshblu-connector.svg?style=flat)](https://david-dm.org/octoblu/generator-meshblu-connector)
+[![devDependency Status](http://img.shields.io/david/dev/octoblu/generator-meshblu-connector.svg?style=flat)](https://david-dm.org/octoblu/generator-meshblu-connector#info=devDependencies)
+[![Build Status](http://img.shields.io/travis/octoblu/generator-meshblu-connector.svg?style=flat&branch=master)](https://travis-ci.org/octoblu/generator-meshblu-connector)
 [![Slack Status](http://community-slack.octoblu.com/badge.svg)](http://community-slack.octoblu.com)
 
 > [Yeoman](http://yeoman.io) generator
