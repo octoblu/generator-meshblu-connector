@@ -32,7 +32,7 @@
     "debug": "^2.2.0",
     "fs-cson": "^0.3.2",
     "meshblu-config": "^4.0.0",
-    "meshblu-connector-runner": "^8.0.0",
+    "meshblu-connector-runner": "^8.1.0",
     "meshblu-connector-schema-generator": "^2.1.0"
   },
   "meshbluConnector": {
