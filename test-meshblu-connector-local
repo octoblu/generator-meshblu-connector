@@ -3,7 +3,7 @@
 generate_config() {
   echo "* generating config"
   local device_type="$1"
-  meshblu-util register --legacy -t "$device_type" > meshblu.json
+  meshblu-util register --legacy -t "$device_type" -s meshblu.octoblu.dev:80 > meshblu.json
 }
 
 get_uuid() {
@@ -40,7 +40,7 @@ add_value_to_key() {
 open_in_browser() {
   local uuid="$(get_uuid)"
   echo "* opening $uuid in browser"
-  open "https://app.octoblu.com/device/$uuid"
+  open "http://app.octoblu.dev/device/$uuid"
 }
 
 claim_device() {

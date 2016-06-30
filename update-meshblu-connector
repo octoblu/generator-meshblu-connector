@@ -124,8 +124,7 @@ main() {
   echo '* 6. Update the schemasUrl in package.json with a valid tag (probably the version you are about to commit)'
   echo '* 7. Make sure it builds in appveyor (x86, x64) and publishes to github releases'
   echo '* 8. Make sure it builds in travis (linux x86, x64; and osx x64) and publishes to npm and github releases'
-  echo '* 9. Add the connector here: https://github.com/octoblu/meshblu-connector-factory-ui/blob/master/src/assets/new-connectors.js'
-  echo '* 10. ACTUALLY TEST it with the Meshblu Connector Installer (connector-factory.octoblu.com) on all platforms'
+  echo '* 9. ACTUALLY TEST it with the Meshblu Connector Installer (connector-factory.octoblu.com) on all platforms'
   echo '* Probably done now'
 }
 

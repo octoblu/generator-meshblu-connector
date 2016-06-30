@@ -18,7 +18,8 @@
   },
   "bin": {
     "update-meshblu-connector": "./update-meshblu-connector",
-    "test-meshblu-connector": "./test-meshblu-connector"
+    "test-meshblu-connector": "./test-meshblu-connector",
+    "test-meshblu-connector-local": "./test-meshblu-connector-local"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha test/*spec.coffee"
