@@ -3,7 +3,7 @@
 generate_config() {
   echo "* generating config"
   local device_type="$1"
-  meshblu-util register --legacy -t "$device_type" -s meshblu.octoblu.dev:80 > meshblu.json
+  meshblu-util register --legacy -t "$device_type" --url http://meshblu.octoblu.dev:80 > meshblu.json
 }
 
 get_uuid() {
