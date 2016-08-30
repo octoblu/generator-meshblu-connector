@@ -48,6 +48,7 @@ describe 'Generator', ->
       .gitignore
       .npmignore
       .travis.yml
+      wercker.yml
       appveyor.yml
       LICENSE
       README.md

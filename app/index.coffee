@@ -92,6 +92,7 @@ class MeshbluConnectorGenerator extends yeoman.Base
     @template "_coffeelint.json", "coffeelint.json", context
     @template "_appveyor.yml", "appveyor.yml", context
     @template "_travis.yml", ".travis.yml", context
+    @template "_wercker.yml", "wercker.yml", context
     @template "_README.md", "README.md", context
     @template "_LICENSE", "LICENSE", context
     @template "test/_connector-spec.coffee", "test/connector-spec.coffee", context
