@@ -21,18 +21,18 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "coffee-coverage": "^1.0.1",
-    "mocha": "^3.0.0",
+    "coffee-coverage": "^2.0.1",
+    "mocha": "^3.2.0",
     "segfault-handler": "^1.0.0",
-    "sinon": "^1.17.3",
+    "sinon": "^2.0.0",
     "sinon-chai": "^2.8.0"
   },
   "dependencies": {
-    "coffee-script": "^1.11.0",
-    "debug": "^2.2.0",
+    "coffee-script": "^1.12.4",
+    "debug": "^2.6.3",
     "fs-cson": "^0.3.2",
-    "meshblu-config": "^6.0.0",
-    "meshblu-connector-runner": "^10.0.0",
+    "meshblu-config": "^7.0.0",
+    "meshblu-connector-runner": "^10.5.3",
     "meshblu-connector-schema-generator": "^2.1.0"
   },
   "meshbluConnector": {
