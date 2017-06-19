@@ -1,11 +1,13 @@
+{afterEach, beforeEach, describe, it} = global
+{expect} = require 'chai'
 Connector = require '../'
 
 describe 'Connector', ->
-  beforeEach (done) ->
+  beforeEach 'start the connector', (done) ->
     @sut = new Connector
     @sut.start {}, done
 
-  afterEach (done) ->
+  afterEach 'shut it down', (done) ->
     @sut.close done
 
   describe '->isOnline', ->

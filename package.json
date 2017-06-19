@@ -1,6 +1,6 @@
 {
   "name": "generator-meshblu-connector",
-  "version": "14.2.3",
+  "version": "15.0.0",
   "description": "A generator for Yeoman",
   "keywords": [
     "yeoman-generator"
@@ -25,27 +25,27 @@
     "test": "./node_modules/.bin/mocha test/*spec.coffee"
   },
   "dependencies": {
-    "coffee-script": "^1.10.0",
+    "coffee-script": "^1.12.6",
     "fs-cson": "^0.3.2",
-    "github": "^0.2.4",
+    "github": "^9.2.0",
     "html-wiring": "^1.2.0",
     "lodash": "^4.13.1",
-    "yeoman-generator": "^0.22.5"
+    "yeoman-generator": "^1.1.1"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "glob": "^7.0.3",
+    "chai": "^4.0.2",
+    "glob": "^7.1.2",
     "lodash": "^4.13.1",
-    "mocha": "^2.4.5",
-    "npm": "^3.8.7",
+    "mocha": "^3.4.2",
+    "npm": "^5.0.3",
     "rimraf": "^2.5.2",
-    "sinon": "^1.17.3",
-    "sinon-chai": "^2.8.0",
-    "yeoman-assert": "^2.2.0",
+    "sinon": "^2.3.4",
+    "sinon-chai": "^2.11.0",
+    "yeoman-assert": "^3.0.0",
     "yeoman-test": "^1.1.0"
   },
   "peerDependencies": {
-    "yo": "^1.8.0"
+    "yo": "^2.0.0"
   },
   "engines": {
     "node": ">=0.8.0",

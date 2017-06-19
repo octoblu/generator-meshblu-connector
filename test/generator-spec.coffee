@@ -1,3 +1,6 @@
+{before, beforeEach, describe, it} = global
+{expect} = require 'chai'
+
 _       = require 'lodash'
 path    = require 'path'
 helpers = require 'yeoman-test'
@@ -7,14 +10,12 @@ glob    = require 'glob'
 npm     = require 'npm'
 
 GENERATOR_NAME = 'yoyo'
-DEST = path.join __dirname, '..', 'tmp', "meshblu-connector-#{GENERATOR_NAME}"
 
 describe 'Generator', ->
-  before 'run the helper', (done) ->
+  before 'run the helper', ->
     @timeout 10000
-    appDir = path.join __dirname, '..', 'app'
     helpers
-      .run appDir
+      .run path.join(__dirname, '../app')
       .inTmpDir (dir) =>
         @tmpDir = dir
       .withOptions
@@ -23,9 +24,6 @@ describe 'Generator', ->
       .withPrompts
         githubUser: 'sqrtofsaturn'
         connectorName: GENERATOR_NAME
-      .on 'error', (error) =>
-        done error
-      .on 'end', done
 
   it 'creates expected files', ->
     assert.file '''
@@ -93,5 +91,5 @@ describe 'Generator', ->
 
     it 'should pass the tests', (done) ->
       @mocha.run (failures) =>
-        expect(failures).to.be.empty
+        expect(failures).to.equal 0
         done()
