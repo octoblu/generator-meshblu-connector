@@ -14,7 +14,7 @@ class Helpers
         type: 'oauth'
         token: process.env.GITHUB_TOKEN
 
-    github.user.getFrom {user}, callback
+    github.user.getFrom { user }, callback
 
   githubSlug: (githubUrl, appname) =>
     parsedGithub = url.parse githubUrl
