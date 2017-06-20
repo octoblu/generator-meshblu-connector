@@ -16,10 +16,10 @@ class MeshbluConnectorGenerator extends Generator
 
     @cwd = @destinationRoot()
     @pkg = @_readFileAsJSON 'package.json'
-  #
+
   initializing: =>
     @appname = _.kebabCase @appname
-  #
+
   prompting: =>
     prompts = [
       {
@@ -40,19 +40,19 @@ class MeshbluConnectorGenerator extends Generator
     return @prompt(prompts).then ({@githubUser, @connectorName}) =>
       @noMeshbluConnector = _.replace @connectorName, /^meshblu-connector-/, ''
       @fullAppName        = "meshblu-connector-#{@noMeshbluConnector}"
-  #
-  # userInfo: =>
-  #   return if @realname? and @githubUrl?
-  #
-  #   done = @async()
-  #
-  #   helpers.githubUserInfo @githubUser, (error, res) =>
-  #     @env.error error if error?
-  #     @realname = res.name
-  #     @email = res.email
-  #     @githubUrl = res.html_url
-  #     done()
-  #
+
+  userInfo: =>
+    return if @realname? and @githubUrl?
+
+    done = @async()
+
+    helpers.githubUserInfo @githubUser, (error, res) =>
+      @env.error error if error?
+      @realname = res.name
+      @email = res.email
+      @githubUrl = res.html_url
+      done()
+
   configuring: =>
     @fs.copy @templatePath('_gitignore'), @destinationPath('.gitignore')
     @fs.copy @templatePath('_npmignore'), @destinationPath('.npmignore')
@@ -125,6 +125,7 @@ class MeshbluConnectorGenerator extends Generator
     try
       return JSON.parse htmlWiring.readFileAsString fullPath
     catch error
+      console.error error.stack
       return null
   #
   _readFileAsJSON: (relativePath) =>
@@ -141,12 +142,12 @@ class MeshbluConnectorGenerator extends Generator
   #   catch error
   #     console.error error
   #
-  # install: =>
-  #   return if @skipInstall
-  #
-  #   @installDependencies npm: true, bower: false
-  #
-  # end: =>
-  #   return if @skipInstall
+  install: =>
+    return if @skipInstall
+
+    @installDependencies npm: true, bower: false
+
+  end: =>
+    return if @skipInstall
 
 module.exports = MeshbluConnectorGenerator
