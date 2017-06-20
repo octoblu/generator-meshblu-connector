@@ -112,14 +112,14 @@ class MeshbluConnectorGenerator extends Generator
     newPackage.meshbluConnector ?= {}
     newPackage.meshbluConnector.githubSlug ?= githubSlug
     return @_writeFileAsJSON(newPackage, 'package.json')
-  #
-  # _readFile: (relativePath) =>
-  #   fullPath = path.join @cwd, relativePath
-  #   try
-  #     return require fullPath
-  #   catch
-  #     return null
-  #
+
+  _readFile: (relativePath) =>
+    fullPath = path.join @cwd, relativePath
+    try
+      return require fullPath
+    catch
+      return null
+
   _readTemplateAsJSON: (relativePath) =>
     fullPath = path.join __dirname, 'templates', relativePath
     try
@@ -127,21 +127,21 @@ class MeshbluConnectorGenerator extends Generator
     catch error
       console.error error.stack
       return null
-  #
+
   _readFileAsJSON: (relativePath) =>
     fullPath = path.join @cwd, relativePath
     try
       return JSON.parse htmlWiring.readFileAsString fullPath
     catch
       return null
-  #
-  # _writeFileAsJSON: (jsonObj, relativePath) =>
-  #   fullPath = path.join @cwd, relativePath
-  #   try
-  #     return @write fullPath, JSON.stringify(jsonObj, null, 2)
-  #   catch error
-  #     console.error error
-  #
+
+  _writeFileAsJSON: (jsonObj, relativePath) =>
+    fullPath = path.join @cwd, relativePath
+    try
+      return @write fullPath, JSON.stringify(jsonObj, null, 2)
+    catch error
+      console.error error
+
   install: =>
     return if @skipInstall
 
