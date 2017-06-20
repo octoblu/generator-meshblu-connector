@@ -1,5 +1,3 @@
-path       = require 'path'
-htmlWiring = require 'html-wiring'
 Generator  = require 'yeoman-generator'
 _          = require 'lodash'
 helpers    = require './helpers'
@@ -14,8 +12,7 @@ class MeshbluConnectorGenerator extends Generator
     @skipInstall = options['skip-install']
     @githubUser  = options['github-user']
 
-    @cwd = @destinationRoot()
-    @pkg = @_readFileAsJSON 'package.json'
+    @pkg = @fs.readJSON @destinationPath('package.json')
 
   initializing: =>
     @appname = _.kebabCase @appname
@@ -106,41 +103,12 @@ class MeshbluConnectorGenerator extends Generator
       return @fs.copyTpl @templatePath('_package.json'), @destinationPath('package.json'), context
 
     { githubSlug } = context
-    templatePkg = @_readTemplateAsJSON '_update_package.json'
+    templatePkg = @fs.readJSON @templatePath('_update_package.json')
     newPackage = helpers.mergeJSON({ input: @pkg, overwriteWith: templatePkg })
     newPackage.name = @fullAppName
     newPackage.meshbluConnector ?= {}
     newPackage.meshbluConnector.githubSlug ?= githubSlug
-    return @_writeFileAsJSON(newPackage, 'package.json')
-
-  _readFile: (relativePath) =>
-    fullPath = path.join @cwd, relativePath
-    try
-      return require fullPath
-    catch
-      return null
-
-  _readTemplateAsJSON: (relativePath) =>
-    fullPath = path.join __dirname, 'templates', relativePath
-    try
-      return JSON.parse htmlWiring.readFileAsString fullPath
-    catch error
-      console.error error.stack
-      return null
-
-  _readFileAsJSON: (relativePath) =>
-    fullPath = path.join @cwd, relativePath
-    try
-      return JSON.parse htmlWiring.readFileAsString fullPath
-    catch
-      return null
-
-  _writeFileAsJSON: (jsonObj, relativePath) =>
-    fullPath = path.join @cwd, relativePath
-    try
-      return @write fullPath, JSON.stringify(jsonObj, null, 2)
-    catch error
-      console.error error
+    return @fs.writeJSON @destinationPath('package.json'), newPackage
 
   install: =>
     return if @skipInstall
